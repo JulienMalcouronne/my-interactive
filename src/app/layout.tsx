@@ -1,10 +1,10 @@
 import "./globals.css";
 import React from "react";
 import { generatePseudonym } from "@/lib/pseudonym";
-import PseudonymDisplay from "@/components/PseudonymDisplay";
-import MainNavbar from "@/components/MainNavbar";
-import ScoreProvider from "@/components/ScoreProvider";
-import ScoreHeader from "@/components/ScoreHeader";
+import PseudonymDisplay from "@/components/global/PseudonymDisplay";
+import MainNavbar from "@/components/global/MainNavbar";
+import ScoreProvider from "@/components/global/ScoreProvider";
+import ScoreHeader from "@/components/global/ScoreHeader";
 
 
 

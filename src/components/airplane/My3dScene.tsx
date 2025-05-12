@@ -51,13 +51,13 @@ function GlobePlane({ heading, setHeading }: { heading: number, setHeading: (hea
       dirVec.current.applyAxisAngle(axis, 0.03);
       // ensure direction stays tangential
       dirVec.current.projectOnPlane(axis).normalize();
-      setHeading(h => h + 0.03);
+      setHeading(heading + 0.03);
     }
     if (turnRight) {
       dirVec.current.applyAxisAngle(axis, -0.03);
       // ensure direction stays tangential
       dirVec.current.projectOnPlane(axis).normalize();
-      setHeading(h => h - 0.03);
+      setHeading(heading - 0.03);
     }
     // advance position
     posVec.current.add(dirVec.current.clone().normalize().multiplyScalar(speed));
@@ -81,11 +81,11 @@ function GlobePlane({ heading, setHeading }: { heading: number, setHeading: (hea
   });
 
   useEffect(() => {
-    const handleKeyDown = (e) => {
+    const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'ArrowLeft') setTurnLeft(true);
       if (e.key === 'ArrowRight') setTurnRight(true);
     };
-    const handleKeyUp = (e) => {
+    const handleKeyUp = (e: KeyboardEvent) => {
       if (e.key === 'ArrowLeft') setTurnLeft(false);
       if (e.key === 'ArrowRight') setTurnRight(false);
     };
