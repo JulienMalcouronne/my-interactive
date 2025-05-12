@@ -23,7 +23,7 @@ export default function RootLayout({
           <ScoreProvider>
             <div className="border-b z-[999] sticky top-0 left-0 right-0 bg-white bg-opacity-50 backdrop-blur-md">
               <MainNavbar />
-              <div className="flex items-center gap-6">
+              <div className="flex items-center gap-6 no-print">
                 <PseudonymDisplay initialName={name} />
                 <ScoreHeader />
               </div>

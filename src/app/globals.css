@@ -49,7 +49,8 @@ input {
     font-size: 12px;
   }
 
-  /* nav {
+  nav,
+  .no-print {
     display: none;
-  } */
+  }
 }
