@@ -9,7 +9,9 @@ export default function MainNavbar() {
             <li>
                 <Link href={'airplane'}>Airplane</Link>
             </li>
-
+            <li>
+                <Link href={'resume'}>Resume</Link>
+            </li>
             <li className="flex-1 text-right">
                 <Link href={'leaderboard'}>Leaderboard</Link>
             </li>
