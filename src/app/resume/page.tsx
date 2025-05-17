@@ -112,10 +112,10 @@ export default function Resume() {
                     <section>
                         <h2 className="text-xl font-semibold border-b pb-1 mb-2 uppercase">Formations</h2>
                         <ul className="list-disc list-inside text-sm space-y-1">
+                            <li>Le Wagon – Développement Web (2021)</li>
                             <li>Montpellier Business School – Master Vente & International Business (2016 – 2020)</li>
                             <li>Linköping University (Suède) – Business Administration (2017 – 2018)</li>
                             <li>IUT Cergy – DUT Techniques de Commercialisation (2014 – 2016)</li>
-                            <li>Le Wagon – Développement Web (2021)</li>
                         </ul>
                     </section>
                 </div>
