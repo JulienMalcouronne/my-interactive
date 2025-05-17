@@ -5,6 +5,7 @@ import PseudonymDisplay from "@/components/global/PseudonymDisplay";
 import MainNavbar from "@/components/global/MainNavbar";
 import ScoreProvider from "@/components/global/ScoreProvider";
 import ScoreHeader from "@/components/global/ScoreHeader";
+import Footer from "@/components/global/footer/Footer";
 
 
 
@@ -29,6 +30,7 @@ export default function RootLayout({
               </div>
             </div>
             {children}
+            <Footer />
           </ScoreProvider>
         </main>
       </body>

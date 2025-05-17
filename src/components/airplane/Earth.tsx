@@ -30,7 +30,7 @@ export default function My3dScene() {
   }, []);
 
   return (
-    <div className="w-screen h-screen relative">
+    <div className="w-screen h-[80vh] relative">
       <Canvas camera={{ position: [0, 2, 15], fov: 45 }} style={{ background: "black" }}>
         <Stars radius={100} depth={50} count={10000} factor={4} saturation={0} fade speed={1} />
         <ambientLight intensity={0.6} />

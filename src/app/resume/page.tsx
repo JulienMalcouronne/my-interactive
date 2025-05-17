@@ -8,7 +8,7 @@ export default function Resume() {
             <ResumeActions />
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <aside className="space-y-6">
+                <aside className="space-y-6 print:order-2">
                     <div>
                         <h2 className="text-lg font-bold uppercase border-b pb-1 mb-2">Contact</h2>
                         <ul className="text-sm space-y-1">
@@ -58,7 +58,7 @@ export default function Resume() {
                     </div>
                 </aside>
 
-                <div className="md:col-span-2 space-y-8">
+                <div className="md:col-span-2 space-y-8 print:order-1">
                     <section>
                         <h1 className="text-3xl font-bold mb-1">Julien Malcouronne</h1>
                         <p className="text-lg text-gray-600">Tech Lead Front-End | Développeur Web</p>
