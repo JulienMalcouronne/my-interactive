@@ -70,7 +70,7 @@ export default function Resume() {
                     </section>
 
                     <section>
-                        <h2 className="text-xl font-semibold border-b pb-1 mb-2 uppercase">Expérience</h2>
+                        <h2 className="text-xl font-semibold border-b pb-1 mb-2 uppercase">Expériences</h2>
                         <div className="space-y-4 text-sm">
                             <div>
                                 <h3 className="font-bold">Tech Lead Frontend – ClimateSeed</h3>
