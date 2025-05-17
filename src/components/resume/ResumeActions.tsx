@@ -5,7 +5,7 @@ export default function ResumeActions() {
     return (
         <>
             <div className="flex justify-end gap-4 mb-6 no-print">
-                <Button id="print-button">Imprimer / Générer PDF</Button>
+                <Button id="print-button" bgColor="green">Imprimer / Générer PDF</Button>
             </div>
             <Script strategy="afterInteractive">{`
                 document.getElementById('print-button')
