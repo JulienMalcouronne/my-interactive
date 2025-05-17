@@ -2,15 +2,15 @@ import React from "react";
 
 import dynamic from 'next/dynamic'
 
-const My3DScene = dynamic(
-    () => import('@/components/airplane/My3dScene'),
+const Earth = dynamic(
+    () => import('@/components/airplane/Earth'),
 )
 
 
 export default function Airplane() {
     return (
         <div>
-            <My3DScene />
+            <Earth />
         </div>
     );
 }
