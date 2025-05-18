@@ -20,14 +20,14 @@ export default [
       // by default ESLint only allows JSX in .jsx/.tsx — extend that to your file types
       "react/jsx-filename-extension": [
         1,
-        { extensions: [".js", ".jsx", ".ts", ".tsx"] }
+        { extensions: [".js", ".jsx", ".ts", ".tsx"] },
       ],
     },
     settings: {
       // ensure the import/resolver knows about TS extensions
       "import/resolver": {
-        node: { extensions: [".js", ".jsx", ".ts", ".tsx"] }
-      }
-    }
-  }
+        node: { extensions: [".js", ".jsx", ".ts", ".tsx"] },
+      },
+    },
+  },
 ];

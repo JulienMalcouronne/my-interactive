@@ -32,8 +32,6 @@ input {
 }
 
 @layer utilities {
-
-
   button {
     display: inline-block;
     border: 1px solid #ccc;

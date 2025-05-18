@@ -7,15 +7,12 @@ import ScoreProvider from "@/components/global/ScoreProvider";
 import ScoreHeader from "@/components/global/ScoreHeader";
 import Footer from "@/components/global/footer/Footer";
 
-
-
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-
-  const name = generatePseudonym()
+  const name = generatePseudonym();
 
   return (
     <html lang="en">
