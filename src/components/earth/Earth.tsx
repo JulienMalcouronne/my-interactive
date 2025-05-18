@@ -3,8 +3,8 @@
 import { Canvas } from "@react-three/fiber";
 import { Stars, OrbitControls } from "@react-three/drei";
 import { useState, useEffect, useMemo } from "react";
-import RotatingSphere from "../earth/RotatingSphere";
-import GlobeDot from "../earth/GlobeDot";
+import RotatingSphere from "./RotatingSphere";
+import GlobeDot from "./GlobeDot";
 
 export default function Earth() {
   const [offset, setOffset] = useState({ x: 0, y: 0, z: 0 });
@@ -45,7 +45,7 @@ export default function Earth() {
   );
 
   return (
-    <div className="w-screen h-[80vh] relative">
+    <div className="w-screen h-[calc(100vh-128px)] relative">
       <Canvas
         camera={{ position: [0, 2, 15], fov: 45 }}
         style={{ background: "black" }}

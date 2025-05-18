@@ -5,13 +5,13 @@ export default function MainNavbar() {
     <nav className="gap-4 p-4 bg-black">
       <ul className="flex gap-4">
         <li>
-          <Link href={"/"}>Home</Link>
+          <Link href={"/"}>Accueil</Link>
         </li>
         <li>
-          <Link href={"airplane"}>Airplane</Link>
+          <Link href={"earth"}>Terre</Link>
         </li>
         <li>
-          <Link href={"resume"}>Resume</Link>
+          <Link href={"resume"}>CV</Link>
         </li>
         <li className="flex-1 text-right">
           <Link href={"leaderboard"}>Leaderboard</Link>
