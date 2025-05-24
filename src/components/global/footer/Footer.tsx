@@ -33,7 +33,7 @@ export default function Footer() {
               <a href="mailto:malcouronnejulien@gmail.com">Email</a>
             </li>
             <li>
-              <a href="https://github.com/tonprofil" target="_blank">
+              <a href="https://github.com/JulienMalcouronne" target="_blank">
                 GitHub
               </a>
             </li>

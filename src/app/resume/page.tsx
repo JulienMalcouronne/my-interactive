@@ -58,6 +58,7 @@ export default function Resume() {
               <li>Javascript, Typescript</li>
               <li>Vue.js, React, Next.js, Nuxt.js</li>
               <li>NestJS, ExpressJS</li>
+              <li>Vitest, Playwright, Cypress</li>
               <li>Ruby, Python, Rust</li>
               <li>SQL, Docker, Git</li>
               <li>Figma, InDesign, Whimsical</li>

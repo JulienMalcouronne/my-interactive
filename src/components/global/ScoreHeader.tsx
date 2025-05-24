@@ -2,6 +2,7 @@
 
 import React from "react";
 import { useScore } from "./ScoreProvider";
+import Button from "./button/button";
 
 export default function ScoreHeader() {
   const { score, multiplier, increaseMultiplier } = useScore();
@@ -9,7 +10,7 @@ export default function ScoreHeader() {
   return (
     <div className="flex items-center gap-4 text-zinc-600 dark:text-zinc-300">
       <span className="font-bold text-green-500">Current score: {score}</span>
-      <button
+      <Button
         onClick={increaseMultiplier}
         disabled={multiplier >= 5}
         className={[
@@ -20,7 +21,7 @@ export default function ScoreHeader() {
         ].join(" ")}
       >
         Score multiplier: {multiplier}×
-      </button>
+      </Button>
     </div>
   );
 }
