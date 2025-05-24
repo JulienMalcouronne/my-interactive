@@ -1,5 +1,6 @@
 "use client";
 
+import type { IScoreContextValue } from "@/interfaces";
 import React, {
   createContext,
   useContext,
@@ -8,9 +9,8 @@ import React, {
   useState,
 } from "react";
 import { usePathname } from "next/navigation";
-import type { ScoreContextValue } from "@/interfaces/score-context-value";
 
-const ScoreContext = createContext<ScoreContextValue | null>(null);
+const ScoreContext = createContext<IScoreContextValue | null>(null);
 
 export function useScore() {
   const ctx = useContext(ScoreContext);

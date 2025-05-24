@@ -19,20 +19,21 @@ test("renders and clicks the button", () => {
 });
 
 test("button has correct background color", () => {
-  const { getByRole } = render(<Button bgColor="green" onClick={() => {}}>
-    Click me
-  </Button>,
+  const { getByRole } = render(
+    <Button bgColor="green" onClick={() => {}}>
+      Click me
+    </Button>,
   );
   const button = getByRole("button", { name: /click me/i });
   expect(button).toHaveClass("bg-green-600");
-}); 
+});
 
-test('button is disabled when contain disabled attribute', () => {
-  const { getByRole } = render(<Button disabled onClick={() => {}}>
-    Click me
+test("button is disabled when contain disabled attribute", () => {
+  const { getByRole } = render(
+    <Button disabled onClick={() => {}}>
+      Click me
     </Button>,
   );
   const button = getByRole("button", { name: /click me/i });
   expect(button).toBeDisabled();
 });
-            

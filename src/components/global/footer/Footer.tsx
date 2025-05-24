@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function Footer() {
   return (
     <footer className="sticky bottom-0 bg-neutral-900 text-white text-sm px-6 py-3 no-print">
@@ -12,16 +14,21 @@ export default function Footer() {
           <p className="font-bold">Navigation</p>
           <ul className="flex flex-wrap gap-x-6 gap-y-1">
             <li>
-              <a href="/">Accueil</a>
+              <Link href="/">Accueil</Link>
             </li>
             <li>
-              <a href="/earth">Terre</a>
+              <Link href="/earth">Terre</Link>
             </li>
             <li>
-              <a href="/resume">CV</a>
+
+            <Link href="individual-carbon-footprint">Empreinte carbone individuel</Link>
             </li>
             <li>
-              <a href="/leaderboard">Leaderboard</a>
+              <Link href="/resume">CV</Link>
+            </li>
+
+            <li>
+              <Link href="/leaderboard">Leaderboard</Link>
             </li>
           </ul>
         </div>
@@ -30,25 +37,25 @@ export default function Footer() {
           <p className="font-bold">Contact</p>
           <ul className="flex flex-wrap gap-x-6 gap-y-1">
             <li>
-              <a href="mailto:malcouronnejulien@gmail.com">Email</a>
+              <Link href="mailto:malcouronnejulien@gmail.com">Email</Link>
             </li>
             <li>
-              <a href="https://github.com/JulienMalcouronne" target="_blank">
+              <Link href="https://github.com/JulienMalcouronne" target="_blank">
                 GitHub
-              </a>
+              </Link>
             </li>
             <li>
-              <a
+              <Link
                 href="https://www.linkedin.com/in/julien-malcouronne/"
                 target="_blank"
               >
                 LinkedIn
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="/documents/CV_MALCOURONNE_JULIEN.pdf" target="_blank">
+              <Link href="/documents/CV_MALCOURONNE_JULIEN.pdf" target="_blank">
                 Télécharger le CV
-              </a>
+              </Link>
             </li>
           </ul>
         </div>

@@ -11,6 +11,9 @@ export default function MainNavbar() {
           <Link href={"earth"}>Terre</Link>
         </li>
         <li>
+          <Link href={"individual-carbon-footprint"}>Empreinte carbone individuel</Link>
+        </li>
+        <li>
           <Link href={"resume"}>CV</Link>
         </li>
         <li className="flex-1 text-right">
