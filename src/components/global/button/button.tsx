@@ -1,3 +1,5 @@
+"use client";
+
 const bgVariants: Record<string, string> = {
   blue: "bg-blue-600 hover:bg-blue-700",
   red: "bg-red-600 hover:bg-red-700",
@@ -6,17 +8,17 @@ const bgVariants: Record<string, string> = {
 
 export default function Button({
   children,
-  id,
   bgColor,
+  onClick,
 }: {
   children: React.ReactNode;
-  id: string;
   bgColor: keyof typeof bgVariants;
+  onClick: () => void;
 }) {
   return (
     <button
-      id={id}
       className={`px-4 py-2 text-white rounded transition-colors cursor-pointer ${bgVariants[bgColor]}`}
+      onClick={onClick}
     >
       {children}
     </button>
