@@ -20,8 +20,9 @@ export default function Footer() {
               <Link href="/earth">Terre</Link>
             </li>
             <li>
-
-            <Link href="individual-carbon-footprint">Empreinte carbone individuel</Link>
+              <Link href="individual-carbon-footprint">
+                Empreinte carbone individuel
+              </Link>
             </li>
             <li>
               <Link href="/resume">CV</Link>

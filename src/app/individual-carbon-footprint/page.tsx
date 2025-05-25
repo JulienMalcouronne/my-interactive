@@ -4,8 +4,6 @@ import type { ICarbonInput, IIndividualCarbonFields } from "@/interfaces";
 import { FormEvent, useState } from "react";
 import { useRouter } from "next/navigation";
 
-
-
 const basicInputs: ICarbonInput[] = [
   {
     label: "Kilomètres en voiture par semaine:",

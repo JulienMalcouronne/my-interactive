@@ -6,30 +6,35 @@ import MainNavbar from "@/components/global/MainNavbar";
 import ScoreProvider from "@/components/global/ScoreProvider";
 import ScoreHeader from "@/components/global/ScoreHeader";
 import Footer from "@/components/global/footer/Footer";
+import { NextIntlClientProvider } from "next-intl";
+import { getLocale } from "next-intl/server";
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const locale = await getLocale();
   const name = generatePseudonym();
 
   return (
-    <html lang="en">
+    <html lang={locale}>
       <body>
-        <main>
-          <ScoreProvider>
-            <div className="border-b z-[999] sticky top-0 left-0 right-0 bg-white bg-opacity-50 backdrop-blur-md">
-              <MainNavbar />
-              <div className="w-full px-4 py-2 border-b border-zinc-700 bg-white/90 backdrop-blur-sm dark:bg-zinc-900/80 dark:text-white flex flex-wrap items-center justify-between text-sm font-mono no-print">
-                <PseudonymDisplay initialName={name} />
-                <ScoreHeader />
+        <NextIntlClientProvider>
+          <main>
+            <ScoreProvider>
+              <div className="border-b z-[999] sticky top-0 left-0 right-0 bg-white bg-opacity-50 backdrop-blur-md">
+                <MainNavbar />
+                <div className="w-full px-4 py-2 border-b border-zinc-700 bg-white/90 backdrop-blur-sm dark:bg-zinc-900/80 dark:text-white flex flex-wrap items-center justify-between text-sm font-mono no-print">
+                  <PseudonymDisplay initialName={name} />
+                  <ScoreHeader />
+                </div>
               </div>
-            </div>
-            {children}
-          </ScoreProvider>
-        </main>
-        <Footer />
+              {children}
+            </ScoreProvider>
+          </main>
+          <Footer />
+        </NextIntlClientProvider>
       </body>
     </html>
   );

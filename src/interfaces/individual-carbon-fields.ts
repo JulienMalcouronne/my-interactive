@@ -13,10 +13,10 @@ interface IIndividualCarbonFields {
 }
 
 interface ICarbonInput {
-    label: string;
-    name: keyof IIndividualCarbonFields;
-    type: "number";
-    min: number;
+  label: string;
+  name: keyof IIndividualCarbonFields;
+  type: "number";
+  min: number;
 }
 
 export type { IIndividualCarbonFields, ICarbonInput };
