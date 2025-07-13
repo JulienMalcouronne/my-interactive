@@ -1034,6 +1034,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@kurkle/color@npm:^0.3.0":
+  version: 0.3.4
+  resolution: "@kurkle/color@npm:0.3.4"
+  checksum: 10c0/0e9fd55c614b005c5f0c4c755bca19ec0293bc7513b4ea3ec1725234f9c2fa81afbc78156baf555c8b9cb0d305619253c3f5bca016067daeebb3d00ebb4ea683
+  languageName: node
+  linkType: hard
+
 "@mediapipe/tasks-vision@npm:0.10.17":
   version: 0.10.17
   resolution: "@mediapipe/tasks-vision@npm:0.10.17"
@@ -2699,6 +2706,15 @@ __metadata:
     ansi-styles: "npm:^4.1.0"
     supports-color: "npm:^7.1.0"
   checksum: 10c0/4a3fef5cc34975c898ffe77141450f679721df9dde00f6c304353fa9c8b571929123b26a0e4617bde5018977eb655b31970c297b91b63ee83bb82aeb04666880
+  languageName: node
+  linkType: hard
+
+"chart.js@npm:^4.5.0":
+  version: 4.5.0
+  resolution: "chart.js@npm:4.5.0"
+  dependencies:
+    "@kurkle/color": "npm:^0.3.0"
+  checksum: 10c0/f12c7f9a238ee7ce6d3f7111628e9daba86bb8ff8e54cfe63525fde6ded9003c72c4c8d2c7d5702539dc0aff7e682dfec058660ade8d03a970da002656d4ac91
   languageName: node
   linkType: hard
 
@@ -5083,6 +5099,7 @@ __metadata:
     "@types/react-dom": "npm:^19.1.6"
     "@types/three": "npm:^0.178.1"
     "@vitejs/plugin-react": "npm:^4.6.0"
+    chart.js: "npm:^4.5.0"
     eslint: "npm:^9.31.0"
     eslint-config-next: "npm:15.3.5"
     jsdom: "npm:^26.1.0"
@@ -5090,6 +5107,7 @@ __metadata:
     next-intl: "npm:^4.3.4"
     prettier: "npm:^3.6.2"
     react: "npm:^19.1.0"
+    react-chartjs-2: "npm:^5.3.0"
     react-dom: "npm:^19.1.0"
     tailwindcss: "npm:^4.1.11"
     three: "npm:^0.178.0"
@@ -5598,6 +5616,16 @@ __metadata:
   version: 1.2.3
   resolution: "queue-microtask@npm:1.2.3"
   checksum: 10c0/900a93d3cdae3acd7d16f642c29a642aea32c2026446151f0778c62ac089d4b8e6c986811076e1ae180a694cedf077d453a11b58ff0a865629a4f82ab558e102
+  languageName: node
+  linkType: hard
+
+"react-chartjs-2@npm:^5.3.0":
+  version: 5.3.0
+  resolution: "react-chartjs-2@npm:5.3.0"
+  peerDependencies:
+    chart.js: ^4.1.1
+    react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
+  checksum: 10c0/4415d40217c084a49f9a936fbd30f67e0e705148e6f8359bec65601033d1076f31085c45793839fc29ec833e6c427b0bf9861a0c54c432c08d35bc9590ffa41a
   languageName: node
   linkType: hard
 
