@@ -131,7 +131,9 @@ export default function Resume() {
           </section>
 
           <section>
-            <h2 className="text-xl font-semibold border-b pb-1 mb-2 uppercase">Formations</h2>
+            <h2 className="text-xl font-semibold border-b pb-1 mb-2 uppercase">
+              {t('trainee', { count: 2 })}
+            </h2>
             <ul className="list-disc list-inside text-sm space-y-1">
               <li>Le Wagon – {t('webDevelopment')} (2021)</li>
               <li>Montpellier Business School – {t('masterSalesBusiness')} (2016 – 2020)</li>

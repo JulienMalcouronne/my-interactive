@@ -19,6 +19,7 @@
   "roll": "roulis",
   "use": "Utiliser",
   "lang": "{count, plural, one {Langue} other {Langues}}",
+  "trainee": "{count, plural, one {Formation} other {Formations}}",
   "french": "Français",
   "english": "Anglais",
   "swedish": "Suédois",

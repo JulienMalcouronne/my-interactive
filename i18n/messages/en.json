@@ -19,6 +19,7 @@
   "roll": "roll",
   "use": "Use",
   "lang": "{count, plural, one {Language} other {Languages}}",
+  "trainee": "{count, plural, one {Training} other {Trainings}}",
   "french": "French",
   "english": "English",
   "swedish": "Swedish",
