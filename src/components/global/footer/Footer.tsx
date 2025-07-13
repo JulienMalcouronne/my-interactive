@@ -1,42 +1,45 @@
+import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 
 export default function Footer() {
+  const t = useTranslations();
+
   return (
     <footer className="sticky bottom-0 bg-neutral-900 text-white text-sm px-6 py-3 no-print">
       <div className="max-w-screen-xl mx-auto flex flex-wrap justify-between items-start gap-y-4">
         <div className="space-y-1">
           <p className="font-bold">Julien Malcouronne</p>
-          <p>Développeur Front-End</p>
-          <p className="text-xs text-gray-400">© 2025 – Made with Next.js</p>
+          <p>{t('frontendDeveloper')}</p>
+          <p className="text-xs text-gray-400">© 2025 – {t('madeWith')} Next.js</p>
         </div>
 
         <div className="space-y-1">
-          <p className="font-bold">Navigation</p>
+          <p className="font-bold">{t('navigation')}</p>
           <ul className="flex flex-wrap gap-x-6 gap-y-1">
             <li>
-              <Link href="/">Accueil</Link>
+              <Link href="/">{t('home')}</Link>
             </li>
             <li>
-              <Link href="/earth">Terre</Link>
+              <Link href="/earth">{t('earth')}</Link>
             </li>
             <li>
-              <Link href="individual-carbon-footprint">Empreinte carbone individuel</Link>
+              <Link href="individual-carbon-footprint">{t('carbonFootprint')}</Link>
             </li>
             <li>
-              <Link href="/resume">CV</Link>
+              <Link href="/resume">{t('cv')}</Link>
             </li>
 
             <li>
-              <Link href="/leaderboard">Leaderboard</Link>
+              <Link href="/leaderboard">{t('leaderboard')}</Link>
             </li>
           </ul>
         </div>
 
         <div className="space-y-1">
-          <p className="font-bold">Contact</p>
+          <p className="font-bold">{t('contact')}</p>
           <ul className="flex flex-wrap gap-x-6 gap-y-1">
             <li>
-              <Link href="mailto:malcouronnejulien@gmail.com">Email</Link>
+              <Link href="mailto:malcouronnejulien@gmail.com">{t('email')}</Link>
             </li>
             <li>
               <Link href="https://github.com/JulienMalcouronne" target="_blank">
@@ -50,7 +53,7 @@ export default function Footer() {
             </li>
             <li>
               <Link href="/documents/CV_MALCOURONNE_JULIEN.pdf" target="_blank">
-                Télécharger le CV
+                {t('downloadCv')}
               </Link>
             </li>
           </ul>

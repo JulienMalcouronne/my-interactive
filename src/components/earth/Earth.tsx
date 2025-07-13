@@ -5,8 +5,10 @@ import { Stars, OrbitControls } from '@react-three/drei';
 import { useState, useEffect, useMemo } from 'react';
 import RotatingSphere from './RotatingSphere';
 import GlobeDot from './GlobeDot';
+import { useTranslations } from 'next-intl';
 
 export default function Earth() {
+  const t = useTranslations();
   const [offset, setOffset] = useState({ x: 0, y: 0, z: 0 });
 
   useEffect(() => {
@@ -67,9 +69,11 @@ export default function Earth() {
       </Canvas>
 
       <div className="absolute top-4 left-4 text-white bg-black/60 px-4 py-2 rounded shadow">
-        Offsets → X: {Math.round(offset.x) % 360}°, Y: {Math.round(offset.y) % 360}°, Z:{' '}
-        {Math.round(offset.z) % 360}°
-        <div className="mt-1 text-xs">Use ↑/↓ = pitch, ←/→ = yaw, Q/E = roll</div>
+        {t('offset', { count: 567 })} → X: {Math.round(offset.x) % 360}°, Y:{' '}
+        {Math.round(offset.y) % 360}°, Z: {Math.round(offset.z) % 360}°
+        <div className="mt-1 text-xs">
+          {t('use')} ↑/↓ = {t('pitch')}, ←/→ = {t('yaw')}, Q/E = {t('roll')}
+        </div>
       </div>
     </div>
   );
