@@ -1,50 +1,50 @@
-"use client";
+'use client';
 
-import type { ICarbonInput, IIndividualCarbonFields } from "@/interfaces";
-import { FormEvent, useState } from "react";
-import { useRouter } from "next/navigation";
+import type { ICarbonInput, IIndividualCarbonFields } from '@/interfaces';
+import { FormEvent, useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 const basicInputs: ICarbonInput[] = [
   {
-    label: "Kilomètres en voiture par semaine:",
-    name: "carKmPerWeek",
-    type: "number",
+    label: 'Kilomètres en voiture par semaine:',
+    name: 'carKmPerWeek',
+    type: 'number',
     min: 0,
   },
   {
-    label: "Vols courts par an:",
-    name: "shortFlightsPerYear",
-    type: "number",
+    label: 'Vols courts par an:',
+    name: 'shortFlightsPerYear',
+    type: 'number',
     min: 0,
   },
   {
-    label: "Vols longs par an:",
-    name: "longFlightsPerYear",
-    type: "number",
+    label: 'Vols longs par an:',
+    name: 'longFlightsPerYear',
+    type: 'number',
     min: 0,
   },
   {
-    label: "Surface du logement (m²):",
-    name: "homeSize",
-    type: "number",
+    label: 'Surface du logement (m²):',
+    name: 'homeSize',
+    type: 'number',
     min: 1,
   },
   {
-    label: "Nombre de personnes dans le foyer:",
-    name: "peopleInHousehold",
-    type: "number",
+    label: 'Nombre de personnes dans le foyer:',
+    name: 'peopleInHousehold',
+    type: 'number',
     min: 1,
   },
   {
-    label: "Vêtements achetés par an:",
-    name: "clothesPerYear",
-    type: "number",
+    label: 'Vêtements achetés par an:',
+    name: 'clothesPerYear',
+    type: 'number',
     min: 0,
   },
   {
-    label: "Appareils électroniques achetés par an:",
-    name: "devicesPerYear",
-    type: "number",
+    label: 'Appareils électroniques achetés par an:',
+    name: 'devicesPerYear',
+    type: 'number',
     min: 0,
   },
 ] as const;
@@ -53,28 +53,26 @@ export default function IndividualCarbon() {
   const router = useRouter();
   const [form, setForm] = useState<IIndividualCarbonFields>({
     carKmPerWeek: 0,
-    carType: "essence",
+    carType: 'essence',
     shortFlightsPerYear: 0,
     longFlightsPerYear: 0,
-    meatConsumption: "medium",
+    meatConsumption: 'medium',
     homeSize: 50,
-    heating: "gas",
+    heating: 'gas',
     isWellInsulated: false,
     peopleInHousehold: 1,
     clothesPerYear: 10,
     devicesPerYear: 1,
   });
 
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
-  ) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const target = e.target as HTMLInputElement | HTMLSelectElement;
     const { name, value, type } = target;
     let newValue: string | number | boolean = value;
 
-    if (type === "checkbox") {
+    if (type === 'checkbox') {
       newValue = (target as HTMLInputElement).checked;
-    } else if (type === "number") {
+    } else if (type === 'number') {
       newValue = Number(value);
     }
 
@@ -92,22 +90,16 @@ export default function IndividualCarbon() {
   return (
     <main className="max-w-2xl mx-auto p-6">
       <div className="bg-neutral-900 bg-opacity-90 p-8 rounded-2xl shadow-xl">
-        <h1 className="text-2xl font-bold text-white mb-6">
-          Calculez votre empreinte carbone
-        </h1>
+        <h1 className="text-2xl font-bold text-white mb-6">Calculez votre empreinte carbone</h1>
         <form className="space-y-5" onSubmit={handleSubmit}>
           {basicInputs.map(({ label, name, type, min }) => (
             <div key={name}>
-              <label className="block mb-1 text-sm text-white font-semibold">
-                {label}
-              </label>
+              <label className="block mb-1 text-sm text-white font-semibold">{label}</label>
               <input
                 type={type}
                 name={name}
                 min={min}
-                value={
-                  form[name as keyof IIndividualCarbonFields] as string | number
-                }
+                value={form[name as keyof IIndividualCarbonFields] as string | number}
                 onChange={handleChange}
                 className="w-full px-4 py-2 rounded border border-neutral-700 bg-neutral-800 text-white placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500"
               />
@@ -115,9 +107,7 @@ export default function IndividualCarbon() {
           ))}
 
           <div>
-            <label className="block mb-1 text-sm text-white font-semibold">
-              Type de voiture:
-            </label>
+            <label className="block mb-1 text-sm text-white font-semibold">Type de voiture:</label>
             <select
               name="carType"
               value={form.carType}

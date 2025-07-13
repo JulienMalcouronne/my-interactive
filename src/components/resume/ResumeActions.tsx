@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import Button from "../global/button/button";
+import Button from '../global/button/button';
 
 export default function ResumeActions() {
   return (

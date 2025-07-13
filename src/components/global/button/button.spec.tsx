@@ -1,16 +1,16 @@
-import { render, screen, fireEvent } from "@testing-library/react";
-import Button from "./button";
-import { expect, test, vi } from "vitest";
+import { render, screen, fireEvent } from '@testing-library/react';
+import Button from './button';
+import { expect, test, vi } from 'vitest';
 
-test("renders and clicks the button", () => {
+test('renders and clicks the button', () => {
   const handleClick = vi.fn();
 
   render(
     <Button bgColor="green" onClick={handleClick} id="test-button">
       Click me
-    </Button>,
+    </Button>
   );
-  const button = screen.getByRole("button", { name: /click me/i });
+  const button = screen.getByRole('button', { name: /click me/i });
 
   expect(button).toBeInTheDocument();
 
@@ -18,22 +18,22 @@ test("renders and clicks the button", () => {
   expect(handleClick).toHaveBeenCalledTimes(1);
 });
 
-test("button has correct background color", () => {
+test('button has correct background color', () => {
   const { getByRole } = render(
     <Button bgColor="green" onClick={() => {}}>
       Click me
-    </Button>,
+    </Button>
   );
-  const button = getByRole("button", { name: /click me/i });
-  expect(button).toHaveClass("bg-green-600");
+  const button = getByRole('button', { name: /click me/i });
+  expect(button).toHaveClass('bg-green-600');
 });
 
-test("button is disabled when contain disabled attribute", () => {
+test('button is disabled when contain disabled attribute', () => {
   const { getByRole } = render(
     <Button disabled onClick={() => {}}>
       Click me
-    </Button>,
+    </Button>
   );
-  const button = getByRole("button", { name: /click me/i });
+  const button = getByRole('button', { name: /click me/i });
   expect(button).toBeDisabled();
 });

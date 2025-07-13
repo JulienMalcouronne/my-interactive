@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import { useLoader, useFrame, useThree } from "@react-three/fiber";
-import { useRef, useEffect, useMemo } from "react";
-import * as THREE from "three";
+import { useLoader, useFrame, useThree } from '@react-three/fiber';
+import { useRef, useEffect, useMemo } from 'react';
+import * as THREE from 'three';
 
 export interface RotatingSphereProps {
   markersLatLon: { lat: number; lon: number }[];
@@ -22,7 +22,7 @@ export default function RotatingSphere({
   onPositionReach,
 }: RotatingSphereProps) {
   const groupRef = useRef<THREE.Group>(null!);
-  const texture = useLoader(THREE.TextureLoader, "/textures/map.jpg");
+  const texture = useLoader(THREE.TextureLoader, '/textures/map.jpg');
   const { camera } = useThree();
 
   const markerPositions = useMemo(() => {
@@ -33,14 +33,12 @@ export default function RotatingSphere({
       return new THREE.Vector3(
         r * Math.sin(φ) * Math.cos(θ),
         r * Math.cos(φ),
-        r * Math.sin(φ) * Math.sin(θ),
+        r * Math.sin(φ) * Math.sin(θ)
       );
     });
   }, [markersLatLon, radius, altitude]);
 
-  const markerRefs = useRef<Array<THREE.Mesh | null>>(
-    Array(markersLatLon.length).fill(null),
-  );
+  const markerRefs = useRef<Array<THREE.Mesh | null>>(Array(markersLatLon.length).fill(null));
 
   const triggered = useRef<boolean[]>(Array(markersLatLon.length).fill(false));
 
@@ -52,11 +50,11 @@ export default function RotatingSphere({
     const up = (e: KeyboardEvent) => {
       keys.current[e.key] = false;
     };
-    window.addEventListener("keydown", down);
-    window.addEventListener("keyup", up);
+    window.addEventListener('keydown', down);
+    window.addEventListener('keyup', up);
     return () => {
-      window.removeEventListener("keydown", down);
-      window.removeEventListener("keyup", up);
+      window.removeEventListener('keydown', down);
+      window.removeEventListener('keyup', up);
     };
   }, []);
 
@@ -73,11 +71,7 @@ export default function RotatingSphere({
     if (keys.current.q) baseRot.current.z -= tweak;
     if (keys.current.e) baseRot.current.z += tweak;
 
-    groupRef.current.rotation.set(
-      baseRot.current.x,
-      baseRot.current.y,
-      baseRot.current.z,
-    );
+    groupRef.current.rotation.set(baseRot.current.x, baseRot.current.y, baseRot.current.z);
 
     markerRefs.current.forEach((mesh, i) => {
       if (!mesh) return;

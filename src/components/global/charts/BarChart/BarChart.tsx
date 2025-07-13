@@ -23,8 +23,6 @@ type TData = {
 
 ChartJS.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend);
 
-
-
 const options = {
   responsive: true,
 };

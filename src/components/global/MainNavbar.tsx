@@ -1,5 +1,5 @@
-import Link from "next/link";
-import { useTranslations } from "next-intl";
+import Link from 'next/link';
+import { useTranslations } from 'next-intl';
 
 export default function MainNavbar() {
   const t = useTranslations();
@@ -8,21 +8,19 @@ export default function MainNavbar() {
     <nav className="gap-4 p-4 bg-black">
       <ul className="flex gap-4">
         <li>
-          <Link href={"/"}>{t("home")}</Link>
+          <Link href="/">{t('home')}</Link>
         </li>
         <li>
-          <Link href={"earth"}>Terre</Link>
+          <Link href="/earth">{t('earth')}</Link>
         </li>
         <li>
-          <Link href={"individual-carbon-footprint"}>
-            Empreinte carbone individuel
-          </Link>
+          <Link href="/individual-carbon-footprint">{t('carbonFootprint')}</Link>
         </li>
         <li>
-          <Link href={"resume"}>CV</Link>
+          <Link href="/resume">{t('cv')}</Link>
         </li>
         <li className="flex-1 text-right">
-          <Link href={"leaderboard"}>Leaderboard</Link>
+          <Link href="/leaderboard">{t('leaderboard')}</Link>
         </li>
       </ul>
     </nav>

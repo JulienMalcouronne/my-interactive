@@ -1,8 +1,8 @@
-import React from "react";
+import React from 'react';
 
-import dynamic from "next/dynamic";
+import dynamic from 'next/dynamic';
 
-const Earth = dynamic(() => import("@/components/earth/Earth"));
+const Earth = dynamic(() => import('@/components/earth/Earth'));
 
 export default function Airplane() {
   return (

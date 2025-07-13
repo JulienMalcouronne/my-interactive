@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Link from 'next/link';
 
 export default function Footer() {
   return (
@@ -20,9 +20,7 @@ export default function Footer() {
               <Link href="/earth">Terre</Link>
             </li>
             <li>
-              <Link href="individual-carbon-footprint">
-                Empreinte carbone individuel
-              </Link>
+              <Link href="individual-carbon-footprint">Empreinte carbone individuel</Link>
             </li>
             <li>
               <Link href="/resume">CV</Link>
@@ -46,10 +44,7 @@ export default function Footer() {
               </Link>
             </li>
             <li>
-              <Link
-                href="https://www.linkedin.com/in/julien-malcouronne/"
-                target="_blank"
-              >
+              <Link href="https://www.linkedin.com/in/julien-malcouronne/" target="_blank">
                 LinkedIn
               </Link>
             </li>

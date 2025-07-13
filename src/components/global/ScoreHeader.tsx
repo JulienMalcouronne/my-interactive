@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import React from "react";
-import { useScore } from "./ScoreProvider";
-import Button from "./button/button";
+import React from 'react';
+import { useScore } from './ScoreProvider';
+import Button from './button/button';
 
 export default function ScoreHeader() {
   const { score, multiplier, increaseMultiplier } = useScore();
@@ -14,11 +14,9 @@ export default function ScoreHeader() {
         onClick={increaseMultiplier}
         disabled={multiplier >= 5}
         className={[
-          "select-none px-3 py-1 border rounded font-bold",
-          multiplier >= 5
-            ? "opacity-50 cursor-not-allowed"
-            : "cursor-pointer hover:bg-gray-100",
-        ].join(" ")}
+          'select-none px-3 py-1 border rounded font-bold',
+          multiplier >= 5 ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer hover:bg-gray-100',
+        ].join(' ')}
       >
         Score multiplier: {multiplier}×
       </Button>

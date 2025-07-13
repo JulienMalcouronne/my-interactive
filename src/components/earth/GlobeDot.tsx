@@ -1,16 +1,10 @@
-"use client";
+'use client';
 
-import { useThree, useFrame } from "@react-three/fiber";
-import { useRef } from "react";
-import * as THREE from "three";
+import { useThree, useFrame } from '@react-three/fiber';
+import { useRef } from 'react';
+import * as THREE from 'three';
 
-export default function GlobeDot({
-  radius,
-  altitude,
-}: {
-  radius: number;
-  altitude: number;
-}) {
+export default function GlobeDot({ radius, altitude }: { radius: number; altitude: number }) {
   const { camera } = useThree();
   const dot = useRef<THREE.Mesh>(null!);
   const pos = useRef(new THREE.Vector3(radius + altitude, 0, 0));
@@ -22,9 +16,7 @@ export default function GlobeDot({
     pos.current.normalize().multiplyScalar(radius + altitude);
     dot.current.position.copy(pos.current);
 
-    const camOff = new THREE.Vector3(0, 2, 5).applyQuaternion(
-      dot.current.quaternion,
-    );
+    const camOff = new THREE.Vector3(0, 2, 5).applyQuaternion(dot.current.quaternion);
     const desired = pos.current.clone().add(camOff);
     camera.position.lerp(desired, 0.1);
     camera.lookAt(pos.current);
