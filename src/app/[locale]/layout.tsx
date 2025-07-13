@@ -1,8 +1,8 @@
 import { notFound } from 'next/navigation';
 import { Locale, hasLocale, NextIntlClientProvider } from 'next-intl';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
-import { ReactNode } from 'react';
-import { routing } from '../../../i18n/routing';
+import { ReactNode, Suspense } from 'react';
+import { routing } from '../../i18n/routing';
 import MainNavbar from '@/components/global/MainNavbar';
 import PseudonymDisplay from '@/components/global/PseudonymDisplay';
 import ScoreHeader from '@/components/global/ScoreHeader';
@@ -46,6 +46,7 @@ export default async function LocaleLayout({ children, params }: Props) {
             <ScoreProvider>
               <div className="border-b z-[999] sticky top-0 left-0 right-0 bg-white bg-opacity-50 backdrop-blur-md">
                 <MainNavbar />
+
                 <div className="w-full px-4 py-2 border-b border-zinc-700 bg-white/90 backdrop-blur-sm dark:bg-zinc-900/80 dark:text-white flex flex-wrap items-center justify-between text-sm font-mono no-print">
                   <PseudonymDisplay initialName={name} />
                   <ScoreHeader />

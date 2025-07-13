@@ -1,11 +1,22 @@
 import createMiddleware from 'next-intl/middleware';
-import { routing } from '../i18n/routing';
+import { routing } from './i18n/routing';
+import type { NextRequest } from 'next/server';
 
-export default createMiddleware(routing);
+const intlMiddleware = createMiddleware(routing);
+
+export async function middleware(request: NextRequest) {
+  const fullPathname = request.nextUrl.pathname;
+
+  // Exécute intlMiddleware et clone la réponse
+  const intlResponse = intlMiddleware(request);
+  const response = new Response(intlResponse.body, intlResponse);
+
+  // Ajoute x-pathname manuellement
+  response.headers.set('x-pathname', fullPathname);
+
+  return response;
+}
 
 export const config = {
-  // Match all pathnames except for
-  // - … if they start with `/api`, `/trpc`, `/_next` or `/_vercel`
-  // - … the ones containing a dot (e.g. `favicon.ico`)
   matcher: '/((?!api|trpc|_next|_vercel|.*\\..*).*)',
 };
