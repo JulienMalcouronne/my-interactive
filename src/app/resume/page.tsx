@@ -7,6 +7,8 @@ import {
 import ResumeActions from "@/components/resume/ResumeActions";
 
 export default function Resume() {
+  const numberOfYears = new Date().getFullYear() - 2021;
+
   return (
     <div className="max-w-4xl mx-auto p-8 font-sans text-gray-800">
       <ResumeActions />
@@ -89,11 +91,11 @@ export default function Resume() {
               Profil
             </h2>
             <p className="text-sm">
-              Développeur front-end avec plus de 3 ans d’expérience, passionné
-              par la création d’interfaces web performantes et élégantes.
-              Actuellement Tech Lead chez ClimateSeed, je combine expertise
-              technique et coordination d'équipe pour livrer des solutions
-              robustes et évolutives.
+              Développeur front-end avec plus de {numberOfYears} ans
+              d’expérience, passionné par la création d’interfaces web
+              performantes et élégantes. Actuellement Tech Lead chez ClimateSeed,
+              je combine expertise technique et coordination d'équipe pour
+              livrer des solutions robustes et évolutives.
             </p>
           </section>
 
@@ -104,7 +106,9 @@ export default function Resume() {
             <div className="space-y-4 text-sm">
               <div>
                 <h3 className="font-bold">Tech Lead Frontend – ClimateSeed</h3>
-                <p className="italic text-xs">Juin 2023 – Aujourd’hui</p>
+                <p className="italic text-xs">
+                  Juin 2023 – Aujourd’hui
+                </p>
                 <ul className="list-disc list-inside">
                   <li>
                     Encadrement d'une équipe front, revue de code, formation
