@@ -11,7 +11,7 @@
   "navigation": "Navigation",
   "contact": "Contact",
   "email": "Email",
-  "downloadCv": "Download Resume",
+  "downloadCv": "Download Resume (FR)",
   "printGeneratePdf": "Print / Generate PDF",
   "offset": "{count, plural, one {offset} other {offsets}}",
   "pitch": "pitch",

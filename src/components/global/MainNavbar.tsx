@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { useLocale, useTranslations } from 'next-intl';
 import { usePathname } from 'next/navigation';
 import { getLocalizedHref, SupportedLocale } from '@/lib/localizedRoutes';
+import LanguageSwitcher from './LangSwitcher';
 
 const NAV_ITEMS = [
   { basePath: '/', label: 'home' },
@@ -22,7 +23,7 @@ export default function MainNavbar() {
   const currentPath = stripLocalePrefix(pathname);
 
   return (
-    <nav className="gap-4 p-4 bg-black">
+    <nav className="gap-4 p-4 bg-black flex">
       <ul className="flex gap-4 w-full">
         {NAV_ITEMS.map((item) => {
           const { basePath, label } = item;
@@ -45,6 +46,7 @@ export default function MainNavbar() {
           );
         })}
       </ul>
+      <LanguageSwitcher />
     </nav>
   );
 }
