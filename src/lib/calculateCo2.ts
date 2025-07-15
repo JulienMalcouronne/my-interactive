@@ -45,17 +45,37 @@ const calculateCO2 = (form: IIndividualCarbonFields): number => {
     telework: 0,
   } as const;
 
-  const transportEmissions = dailyCommuteKm * 2 * 220 * (transportFactors[transportMode] ?? 0);
+  const EFFECTIVE_WORKING_DAY = 220;
+  const COMMUTE_BOTH_WAY = 2;
 
-  const flightEmissions = shortFlightsPerYear * 300 + longFlightsPerYear * 1500;
+  const SHORT_FLIGHT_CO2 = 300;
+  const LONG_FLIGHT_CO2 = 1500;
+
+  const WELL_INSULATION_COEFFICIENT = 0.8;
+  const LOW_INSULATION_COEFFICIENT = 1;
+
+  const AVERAGE_CLOTHES_CO2 = 25;
+  const AVERAGE_DEVICE_CO2 = 150;
+
+  const transportEmissions =
+    dailyCommuteKm *
+    COMMUTE_BOTH_WAY *
+    EFFECTIVE_WORKING_DAY *
+    (transportFactors[transportMode] ?? 0);
+
+  const flightEmissions =
+    shortFlightsPerYear * SHORT_FLIGHT_CO2 + longFlightsPerYear * LONG_FLIGHT_CO2;
 
   const foodEmissions = meatFactors[meatConsumption] ?? 0;
 
-  const heatingTotal = homeSize * (heatingFactors[heating] ?? 0) * (isWellInsulated ? 0.8 : 1);
+  const heatingTotal =
+    homeSize *
+    (heatingFactors[heating] ?? 0) *
+    (isWellInsulated ? WELL_INSULATION_COEFFICIENT : LOW_INSULATION_COEFFICIENT);
   const perPersonHeating = heatingTotal / peopleInHousehold;
 
-  const clothes = clothesPerYear * 25;
-  const devices = devicesPerYear * 150;
+  const clothes = clothesPerYear * AVERAGE_CLOTHES_CO2;
+  const devices = devicesPerYear * AVERAGE_DEVICE_CO2;
 
   return Math.round(
     transportEmissions + flightEmissions + foodEmissions + perPersonHeating + clothes + devices
