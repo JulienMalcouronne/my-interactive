@@ -71,5 +71,16 @@
   "diesel": "Diesel",
   "gas": "Essence",
   "electric": "Électrique",
-  "vehicleType": "Type de voiture :"
+  "vehicleType": "Type de voiture :",
+  "transportMode": "Mode de transport principal",
+  "car": "Voiture",
+  "bus": "Bus",
+  "metro": "Métro / Tram",
+  "train": "Train / TGV",
+  "bike": "Vélo",
+  "walk": "Marche",
+  "telework": "Télétravail complet",
+  "dailyCommuteKm": "Distance domicile-travail (aller simple, en km)",
+  "heating": "Type de chauffage",
+  "fuel": "Fioul"
 }

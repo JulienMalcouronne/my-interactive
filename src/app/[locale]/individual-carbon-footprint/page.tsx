@@ -1,62 +1,17 @@
 'use client';
 
-import type { ICarbonInput, IIndividualCarbonFields } from '@/interfaces';
+import type { IIndividualCarbonFields } from '@/interfaces';
 import { FormEvent, useState } from 'react';
-import { useRouter } from 'next/navigation';
 import { useTranslations } from 'next-intl';
+import { calculateCO2 } from '@/lib';
 
 export default function IndividualCarbon() {
   const t = useTranslations();
 
-  const basicInputs: ICarbonInput[] = [
-    {
-      label: t('kmByCarPerWeek'),
-      name: 'carKmPerWeek',
-      type: 'number',
-      min: 0,
-    },
-    {
-      label: t('shortFlyPerYear'),
-      name: 'shortFlightsPerYear',
-      type: 'number',
-      min: 0,
-    },
-    {
-      label: t('longFlyPerYear'),
-      name: 'longFlightsPerYear',
-      type: 'number',
-      min: 0,
-    },
-    {
-      label: t('homeSurface'),
-      name: 'homeSize',
-      type: 'number',
-      min: 1,
-    },
-    {
-      label: t('nbPeopleLivingAtHome'),
-      name: 'peopleInHousehold',
-      type: 'number',
-      min: 1,
-    },
-    {
-      label: t('clothesBoughtPerYear'),
-      name: 'clothesPerYear',
-      type: 'number',
-      min: 0,
-    },
-    {
-      label: t('electronicalGoodsPurchasedPerYear'),
-      name: 'devicesPerYear',
-      type: 'number',
-      min: 0,
-    },
-  ] as const;
-
-  const router = useRouter();
   const [form, setForm] = useState<IIndividualCarbonFields>({
-    carKmPerWeek: 0,
+    transportMode: 'car',
     carType: 'essence',
+    dailyCommuteKm: 0,
     shortFlightsPerYear: 0,
     longFlightsPerYear: 0,
     meatConsumption: 'medium',
@@ -69,12 +24,11 @@ export default function IndividualCarbon() {
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-    const target = e.target as HTMLInputElement | HTMLSelectElement;
-    const { name, value, type } = target;
+    const { name, type, value } = e.target;
     let newValue: string | number | boolean = value;
 
     if (type === 'checkbox') {
-      newValue = (target as HTMLInputElement).checked;
+      newValue = (e.target as HTMLInputElement).checked;
     } else if (type === 'number') {
       newValue = Number(value);
     }
@@ -87,7 +41,8 @@ export default function IndividualCarbon() {
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // todo
+    const total = calculateCO2(form);
+    alert(total);
   };
 
   return (
@@ -95,34 +50,84 @@ export default function IndividualCarbon() {
       <div className="bg-neutral-900 bg-opacity-90 p-8 rounded-2xl shadow-xl">
         <h1 className="text-2xl font-bold text-white mb-6">{t('calculateCarbonFootprint')}</h1>
         <form className="space-y-5" onSubmit={handleSubmit}>
-          {basicInputs.map(({ label, name, type, min }) => (
-            <div key={name}>
-              <label className="block mb-1 text-sm text-white font-semibold">{label}</label>
-              <input
-                type={type}
-                name={name}
-                min={min}
-                value={form[name as keyof IIndividualCarbonFields] as string | number}
+          <div>
+            <label className="block mb-1 text-sm text-white font-semibold">
+              {t('transportMode')}
+            </label>
+            <select
+              name="transportMode"
+              value={form.transportMode}
+              onChange={handleChange}
+              className="w-full px-4 py-2 rounded border border-neutral-700 bg-neutral-800 text-white"
+            >
+              <option value="car">{t('car')}</option>
+              <option value="bus">{t('bus')}</option>
+              <option value="metro">{t('metro')}</option>
+              <option value="train">{t('train')}</option>
+              <option value="bike">{t('bike')}</option>
+              <option value="walk">{t('walk')}</option>
+              <option value="telework">{t('telework')}</option>
+            </select>
+          </div>
+
+          {form.transportMode === 'car' && (
+            <div>
+              <label className="block mb-1 text-sm text-white font-semibold">
+                {t('vehicleType')}
+              </label>
+              <select
+                name="carType"
+                value={form.carType}
                 onChange={handleChange}
-                className="w-full px-4 py-2 rounded border border-neutral-700 bg-neutral-800 text-white placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500"
-              />
+                className="w-full px-4 py-2 rounded border border-neutral-700 bg-neutral-800 text-white"
+              >
+                <option value="essence">{t('gas')}</option>
+                <option value="diesel">{t('diesel')}</option>
+                <option value="electric">{t('electric')}</option>
+              </select>
             </div>
-          ))}
+          )}
 
           <div>
             <label className="block mb-1 text-sm text-white font-semibold">
-              {t('vehicleType')}
+              {t('dailyCommuteKm')}
             </label>
-            <select
-              name="carType"
-              value={form.carType}
+            <input
+              type="number"
+              name="dailyCommuteKm"
+              min={0}
+              value={form.dailyCommuteKm}
               onChange={handleChange}
-              className="w-full px-4 py-2 rounded border border-neutral-700 bg-neutral-800 text-white focus:outline-none focus:ring-2 focus:ring-green-500"
-            >
-              <option value="essence">{t('gas')}</option>
-              <option value="diesel">{t('diesel')}</option>
-              <option value="electric">{t('electric')}</option>
-            </select>
+              className="w-full px-4 py-2 rounded border border-neutral-700 bg-neutral-800 text-white"
+            />
+          </div>
+
+          <div>
+            <label className="block mb-1 text-sm text-white font-semibold">
+              {t('shortFlyPerYear')}
+            </label>
+            <input
+              type="number"
+              name="shortFlightsPerYear"
+              min={0}
+              value={form.shortFlightsPerYear}
+              onChange={handleChange}
+              className="w-full px-4 py-2 rounded border border-neutral-700 bg-neutral-800 text-white"
+            />
+          </div>
+
+          <div>
+            <label className="block mb-1 text-sm text-white font-semibold">
+              {t('longFlyPerYear')}
+            </label>
+            <input
+              type="number"
+              name="longFlightsPerYear"
+              min={0}
+              value={form.longFlightsPerYear}
+              onChange={handleChange}
+              className="w-full px-4 py-2 rounded border border-neutral-700 bg-neutral-800 text-white"
+            />
           </div>
 
           <div>
@@ -133,12 +138,40 @@ export default function IndividualCarbon() {
               name="meatConsumption"
               value={form.meatConsumption}
               onChange={handleChange}
-              className="w-full px-4 py-2 rounded border border-neutral-700 bg-neutral-800 text-white focus:outline-none focus:ring-2 focus:ring-green-500"
+              className="w-full px-4 py-2 rounded border border-neutral-700 bg-neutral-800 text-white"
             >
               <option value="high">{t('high')}</option>
               <option value="medium">{t('average')}</option>
               <option value="low">{t('low')}</option>
               <option value="none">{t('none')}</option>
+            </select>
+          </div>
+
+          <div>
+            <label className="block mb-1 text-sm text-white font-semibold">
+              {t('homeSurface')}
+            </label>
+            <input
+              type="number"
+              name="homeSize"
+              min={1}
+              value={form.homeSize}
+              onChange={handleChange}
+              className="w-full px-4 py-2 rounded border border-neutral-700 bg-neutral-800 text-white"
+            />
+          </div>
+
+          <div>
+            <label className="block mb-1 text-sm text-white font-semibold">{t('heating')}</label>
+            <select
+              name="heating"
+              value={form.heating}
+              onChange={handleChange}
+              className="w-full px-4 py-2 rounded border border-neutral-700 bg-neutral-800 text-white"
+            >
+              <option value="gas">{t('gas')}</option>
+              <option value="electric">{t('electric')}</option>
+              <option value="fuel">{t('fuel')}</option>
             </select>
           </div>
 
@@ -153,6 +186,48 @@ export default function IndividualCarbon() {
               />
               {t('homeWellIsolated')}
             </label>
+          </div>
+
+          <div>
+            <label className="block mb-1 text-sm text-white font-semibold">
+              {t('nbPeopleLivingAtHome')}
+            </label>
+            <input
+              type="number"
+              name="peopleInHousehold"
+              min={1}
+              value={form.peopleInHousehold}
+              onChange={handleChange}
+              className="w-full px-4 py-2 rounded border border-neutral-700 bg-neutral-800 text-white"
+            />
+          </div>
+
+          <div>
+            <label className="block mb-1 text-sm text-white font-semibold">
+              {t('clothesBoughtPerYear')}
+            </label>
+            <input
+              type="number"
+              name="clothesPerYear"
+              min={0}
+              value={form.clothesPerYear}
+              onChange={handleChange}
+              className="w-full px-4 py-2 rounded border border-neutral-700 bg-neutral-800 text-white"
+            />
+          </div>
+
+          <div>
+            <label className="block mb-1 text-sm text-white font-semibold">
+              {t('electronicalGoodsPurchasedPerYear')}
+            </label>
+            <input
+              type="number"
+              name="devicesPerYear"
+              min={0}
+              value={form.devicesPerYear}
+              onChange={handleChange}
+              className="w-full px-4 py-2 rounded border border-neutral-700 bg-neutral-800 text-white"
+            />
           </div>
 
           <button

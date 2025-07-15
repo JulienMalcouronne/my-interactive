@@ -1,11 +1,17 @@
+type TTransportMode = 'car' | 'bus' | 'metro' | 'train' | 'bike' | 'walk' | 'telework';
+type TCarType = 'essence' | 'diesel' | 'electric';
+type TMeatConsumption = 'high' | 'medium' | 'low' | 'none';
+type THeating = 'gas' | 'electric' | 'fuel';
+
 interface IIndividualCarbonFields {
-  carKmPerWeek: number;
-  carType: 'essence' | 'electric' | 'diesel';
+  transportMode: TTransportMode;
+  carType: TCarType;
+  dailyCommuteKm: number;
   shortFlightsPerYear: number;
   longFlightsPerYear: number;
-  meatConsumption: 'medium' | 'high' | 'low' | 'none';
+  meatConsumption: TMeatConsumption;
   homeSize: number;
-  heating: 'gas';
+  heating: THeating;
   isWellInsulated: boolean;
   peopleInHousehold: number;
   clothesPerYear: number;

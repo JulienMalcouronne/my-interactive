@@ -38,9 +38,11 @@ function rand<T>(arr: T[]): T {
   return arr[Math.floor(Math.random() * arr.length)];
 }
 
-export function generatePseudonym(): string {
+function generatePseudonym(): string {
   const adj = rand(ADJECTIVES);
   const noun = rand(NOUNS);
   const num = Math.floor(Math.random() * 90) + 10; // 10–99
   return `${adj}${noun}${num}`;
 }
+
+export { generatePseudonym };

@@ -71,5 +71,16 @@
   "diesel": "Diesel",
   "gas": "Gasoline",
   "electric": "Electric",
-  "vehicleType": "Type of car:"
+  "vehicleType": "Car type:",
+  "transportMode": "Main mode of transport",
+  "car": "Car",
+  "bus": "Bus",
+  "metro": "Metro / Tram",
+  "train": "Train / TGV",
+  "bike": "Bike",
+  "walk": "Walking",
+  "telework": "Full remote",
+  "dailyCommuteKm": "Daily commute distance (one way, in km)",
+  "heating": "Heating type",
+  "fuel": "Fuel oil"
 }
