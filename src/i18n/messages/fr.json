@@ -1,6 +1,7 @@
 {
   "home": "Accueil",
   "title": "Portfolio de Julien Malcouronne",
+  "description": "Un portfolio développeur moderne et interactif mettant en valeur des interfaces élégantes, des projets fullstack et des expériences 3D. Construit avec Next.js et React Three Fiber pour démontrer des compétences avancées en développement web.",
   "earth": "Terre",
   "carbonFootprint": "Empreinte carbone individuelle",
   "cv": "CV",

@@ -21,11 +21,27 @@ export function generateStaticParams() {
 
 export async function generateMetadata(props: Omit<Props, 'children'>) {
   const { locale } = await props.params;
-
   const t = await getTranslations({ locale });
 
   return {
     title: t('title'),
+
+    openGraph: {
+      title: t('title'),
+      description: t('description'),
+      url: 'https://tbd.com',
+      siteName: t('title'),
+      images: [
+        {
+          url: '/images/opengraph.jpg',
+          width: 1200,
+          height: 630,
+          alt: 'Julien Malcouronne Portfolio Preview',
+        },
+      ],
+      locale,
+      type: 'website',
+    },
   };
 }
 
@@ -40,6 +56,9 @@ export default async function LocaleLayout({ children, params }: Props) {
 
   return (
     <html lang={locale}>
+      <head>
+        <link rel="iconcjzuhz" href="/images/favicon.ico" type="image/x-icon" />
+      </head>
       <body>
         <NextIntlClientProvider>
           <main>

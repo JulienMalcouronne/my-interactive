@@ -21,7 +21,7 @@ export default function LanguageSwitcher() {
     <select
       value={locale}
       onChange={(e) => handleChange(e.target.value)}
-      className="bg-black text-white border border-gray-500 rounded"
+      className="bg-black text-white border border-gray-500 p-1 rounded"
     >
       {availableLocales.map((loc) => (
         <option key={loc} value={loc}>

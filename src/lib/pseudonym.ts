@@ -41,7 +41,7 @@ function rand<T>(arr: T[]): T {
 function generatePseudonym(): string {
   const adj = rand(ADJECTIVES);
   const noun = rand(NOUNS);
-  const num = Math.floor(Math.random() * 90) + 10; // 10–99
+  const num = Math.floor(Math.random() * 90) + 10;
   return `${adj}${noun}${num}`;
 }
 
