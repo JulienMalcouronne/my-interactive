@@ -23,8 +23,10 @@ export default function MainNavbar() {
   const currentPath = stripLocalePrefix(pathname);
 
   return (
-    <nav className="gap-4 p-4 bg-black flex items-center">
-      <img className="w-15" src="/images/icon.png"></img>
+    <nav className="gap-4 px-5 py-3 bg-black flex items-center">
+      <Link href="/">
+        <img className="w-15" src="/images/icon.png"></img>
+      </Link>
       <ul className="flex gap-4 w-full">
         {NAV_ITEMS.map((item) => {
           const { basePath, label } = item;
