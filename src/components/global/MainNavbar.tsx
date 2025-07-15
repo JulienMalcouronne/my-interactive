@@ -23,11 +23,11 @@ export default function MainNavbar() {
   const currentPath = stripLocalePrefix(pathname);
 
   return (
-    <nav className="gap-4 px-5 py-3 bg-black flex items-center">
+    <nav className="gap-4 px-5 py-3 bg-black flex items-center ">
       <Link href="/">
         <img className="w-15" src="/images/icon.png"></img>
       </Link>
-      <ul className="flex gap-4 w-full">
+      <ul className="flex gap-4 w-full flex-wrap">
         {NAV_ITEMS.map((item) => {
           const { basePath, label } = item;
           const rightAlign = 'rightAlign' in item ? item.rightAlign : false;
