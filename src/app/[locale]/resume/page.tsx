@@ -1,5 +1,5 @@
 import React from 'react';
-import { UserIcon, MapPinIcon, EnvelopeIcon } from '@heroicons/react/24/outline';
+import { UserIcon, MapPinIcon, EnvelopeIcon, PhoneIcon } from '@heroicons/react/24/outline';
 import ResumeActions from '@/components/resume/ResumeActions';
 import { useTranslations } from 'next-intl';
 
@@ -23,6 +23,10 @@ export default function Resume() {
               <li className="flex items-center gap-2">
                 <MapPinIcon className="size-4" />
                 49100 Angers
+              </li>
+              <li className="flex items-center gap-2">
+                <PhoneIcon className="size-4" />
+                <span>+33 6 95 34 46 37</span>
               </li>
               <li className="flex items-center gap-2">
                 <EnvelopeIcon className="size-4" />
