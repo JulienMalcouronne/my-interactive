@@ -22,6 +22,16 @@ export default function ScoreProvider({ children }: { children: React.ReactNode 
   const MAX_MULTIPLIER = 5;
 
   useEffect(() => {
+    window.increaseMultiplier = () => {
+      setMultiplier(10);
+    };
+
+    return () => {
+      delete window.increaseMultiplier;
+    };
+  }, [setMultiplier]);
+
+  useEffect(() => {
     intervalRef.current = multiplier;
   }, [multiplier]);
 
