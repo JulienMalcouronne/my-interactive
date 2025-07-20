@@ -26,10 +26,24 @@ export default function ScoreProvider({ children }: { children: React.ReactNode 
       setMultiplier(10);
     };
 
+    window.hiddenSetScore = (consoleScore?: number) => {
+      if (!consoleScore) {
+        return;
+      }
+
+      if (consoleScore > 500) {
+        console.log('Sorry you have been too greedy');
+        return setScore(0);
+      }
+
+      return setScore(score + consoleScore);
+    };
+
     return () => {
       delete window.increaseMultiplier;
+      delete window.hiddenSetScore;
     };
-  }, [setMultiplier]);
+  }, [setMultiplier, setScore, score]);
 
   useEffect(() => {
     intervalRef.current = multiplier;
