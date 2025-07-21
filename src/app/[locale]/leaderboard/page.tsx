@@ -22,6 +22,10 @@ export default function Leaderboard() {
     { id: randomUUID(), name: 'User 2', score: 2000 },
   ];
 
+  const averageScore = users.length
+    ? users.reduce((acc, user) => acc + user.score, 0) / users.length
+    : 0;
+
   return (
     <div className="h-screen">
       {/* <h1>Leaderboard</h1> */}
@@ -32,22 +36,40 @@ export default function Leaderboard() {
           </caption>
           <thead className="bg-gray-100 text-gray-700 uppercase text-xs tracking-wider">
             <tr>
-              <th className="px-6 py-3 text-left">{t('rank')}</th>
-              <th className="px-6 py-3 text-left">{t('id')}</th>
-              <th className="px-6 py-3 text-left">{t('name')}</th>
-              <th className="px-6 py-3 text-left">{t('score')}</th>
+              <th scope="col" className="px-6 py-3 text-left">
+                {t('rank')}
+              </th>
+              <th scope="col" className="px-6 py-3 text-left">
+                {t('id')}
+              </th>
+              <th scope="col" className="px-6 py-3 text-left">
+                {t('name')}
+              </th>
+              <th scope="col" className="px-6 py-3 text-left">
+                {t('score')}
+              </th>
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-200">
             {users.map((user, index) => (
               <tr key={user.id} className="hover:bg-gray-50 transition">
-                <td className="px-6 py-4">{index + 1}</td>
+                <td scope="row" className="px-6 py-4">
+                  {index + 1}
+                </td>
                 <td className="px-6 py-4">{user.id}</td>
                 <td className="px-6 py-4">{user.name}</td>
                 <td className="px-6 py-4">{user.score}</td>
               </tr>
             ))}
           </tbody>
+          <tfoot>
+            <tr className="hover:bg-gray-50 transition">
+              <th scope="row" colSpan={3} className="px-6 py-4 text-left">
+                {t('averageScore')}
+              </th>
+              <td className="px-6 py-4 font-bold"> {averageScore}</td>
+            </tr>
+          </tfoot>
         </table>
       </div>
     </div>

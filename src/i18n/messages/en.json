@@ -87,5 +87,6 @@
   "rank": "Rank",
   "name": "Name",
   "id": "ID",
-  "score": "Score"
+  "score": "Score",
+  "averageScore": "Average score"
 }

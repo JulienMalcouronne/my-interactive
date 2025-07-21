@@ -87,5 +87,6 @@
   "rank": "Rang",
   "name": "Nom",
   "id": "Identifiant",
-  "score": "Score"
+  "score": "Score",
+  "averageScore": "Score moyen"
 }
