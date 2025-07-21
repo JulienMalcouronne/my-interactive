@@ -25,7 +25,7 @@ export async function generateMetadata(props: Omit<Props, 'children'>) {
 
   return {
     title: t('title'),
-
+    description: t('description'),
     openGraph: {
       title: t('title'),
       description: t('description'),
