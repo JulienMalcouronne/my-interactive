@@ -83,5 +83,9 @@
   "telework": "Full remote",
   "dailyCommuteKm": "Daily commute distance (one way, in km)",
   "heating": "Heating type",
-  "fuel": "Fuel oil"
+  "fuel": "Fuel oil",
+  "rank": "Rank",
+  "name": "Name",
+  "id": "ID",
+  "score": "Score"
 }

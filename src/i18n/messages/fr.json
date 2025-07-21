@@ -83,5 +83,9 @@
   "telework": "Télétravail complet",
   "dailyCommuteKm": "Distance domicile-travail (aller simple, en km)",
   "heating": "Type de chauffage",
-  "fuel": "Fioul"
+  "fuel": "Fioul",
+  "rank": "Rang",
+  "name": "Nom",
+  "id": "Identifiant",
+  "score": "Score"
 }
