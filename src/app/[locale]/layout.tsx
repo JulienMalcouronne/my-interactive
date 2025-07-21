@@ -1,7 +1,7 @@
 import { notFound } from 'next/navigation';
 import { Locale, hasLocale, NextIntlClientProvider } from 'next-intl';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
-import { ReactNode, Suspense } from 'react';
+import { ReactNode } from 'react';
 import { routing } from '../../i18n/routing';
 import MainNavbar from '@/components/global/MainNavbar';
 import PseudonymDisplay from '@/components/global/PseudonymDisplay';
