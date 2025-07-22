@@ -1,6 +1,5 @@
+import { headers } from 'next/headers';
 import { getTranslations } from 'next-intl/server';
-
-// import BarChart from '@/components/global/charts/BarChart/BarChart';
 
 type LeaderboardEntry = {
   id: number;
@@ -9,18 +8,11 @@ type LeaderboardEntry = {
   score: number;
 };
 
-type Props = {
-  searchParams?: Promise<{ uid?: string }>;
-};
-
-import { headers } from 'next/headers';
-
-export async function fetchLeaderboard() {
+async function fetchLeaderboard() {
   const headersList = await headers();
   const host = headersList.get('host');
-  const protocol = process.env.NODE_ENV === 'development' ? 'http' : 'https';
 
-  const res = await fetch(`${protocol}://${host}/api/leaderboard`, {
+  const res = await fetch('api/leaderboard', {
     cache: 'no-store',
     headers: {
       'Content-Type': 'application/json',
@@ -34,7 +26,7 @@ export async function fetchLeaderboard() {
   return res.json();
 }
 
-export default async function Leaderboard(props: Props) {
+export default async function Leaderboard() {
   const t = await getTranslations();
 
   const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/leaderboard`, {
@@ -46,10 +38,6 @@ export default async function Leaderboard(props: Props) {
   }
 
   const users: LeaderboardEntry[] = await fetchLeaderboard();
-
-  const query = await props.searchParams;
-
-  const currentUser = users.find((user) => user.uid === query?.uid);
 
   const averageScore = users.length
     ? users.reduce((acc, user) => acc + user.score, 0) / users.length
