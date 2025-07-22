@@ -11,8 +11,9 @@ type LeaderboardEntry = {
 async function fetchLeaderboard() {
   const headersList = await headers();
   const host = headersList.get('host');
+  const protocol = process.env.NODE_ENV === 'development' ? 'http' : 'https';
 
-  const res = await fetch('api/leaderboard', {
+  const res = await fetch(`${protocol}://${host}/api/leaderboard`, {
     cache: 'no-store',
     headers: {
       'Content-Type': 'application/json',
@@ -28,14 +29,6 @@ async function fetchLeaderboard() {
 
 export default async function Leaderboard() {
   const t = await getTranslations();
-
-  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/leaderboard`, {
-    cache: 'no-store',
-  });
-
-  if (!res.ok) {
-    throw new Error('Failed to fetch leaderboard data');
-  }
 
   const users: LeaderboardEntry[] = await fetchLeaderboard();
 
