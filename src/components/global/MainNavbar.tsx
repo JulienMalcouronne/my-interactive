@@ -19,7 +19,7 @@ export default function MainNavbar() {
   const locale = useLocale() as SupportedLocale;
   const pathname = usePathname();
 
-  const stripLocalePrefix = (path: string) => path.replace(/^\/(fr|en|es|sv)/, '') || '/';
+  const stripLocalePrefix = (path: string) => path.replace(/^\/(fr|en)/, '') || '/';
   const currentPath = stripLocalePrefix(pathname);
 
   return (

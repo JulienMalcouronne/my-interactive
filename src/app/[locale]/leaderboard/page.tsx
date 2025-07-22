@@ -1,26 +1,55 @@
-import { randomUUID } from 'crypto';
-import { useTranslations } from 'next-intl';
+import { getTranslations } from 'next-intl/server';
 
 // import BarChart from '@/components/global/charts/BarChart/BarChart';
 
-export default function Leaderboard() {
-  // const data = {
-  //   labels: ['Red', 'Blue', 'Yellow'],
-  //   datasets: [
-  //     {
-  //       label: 'Rank',
-  //       data: [12, 19, 3],
-  //       backgroundColor: ['red', 'blue', 'yellow'],
-  //     },
-  //   ],
-  // };
+type LeaderboardEntry = {
+  id: number;
+  uid: string;
+  name: string;
+  score: number;
+};
 
-  const t = useTranslations();
+type Props = {
+  searchParams?: Promise<{ uid?: string }>;
+};
 
-  const users = [
-    { id: randomUUID(), name: 'user 1', score: 3000 },
-    { id: randomUUID(), name: 'User 2', score: 2000 },
-  ];
+import { headers } from 'next/headers';
+
+export async function fetchLeaderboard() {
+  const headersList = await headers();
+  const host = headersList.get('host');
+  const protocol = process.env.NODE_ENV === 'development' ? 'http' : 'https';
+
+  const res = await fetch(`${protocol}://${host}/api/leaderboard`, {
+    cache: 'no-store',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
+
+  if (!res.ok) {
+    throw new Error('Failed to fetch leaderboard');
+  }
+
+  return res.json();
+}
+
+export default async function Leaderboard(props: Props) {
+  const t = await getTranslations();
+
+  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/leaderboard`, {
+    cache: 'no-store',
+  });
+
+  if (!res.ok) {
+    throw new Error('Failed to fetch leaderboard data');
+  }
+
+  const users: LeaderboardEntry[] = await fetchLeaderboard();
+
+  const query = await props.searchParams;
+
+  const currentUser = users.find((user) => user.uid === query?.uid);
 
   const averageScore = users.length
     ? users.reduce((acc, user) => acc + user.score, 0) / users.length
@@ -63,6 +92,12 @@ export default function Leaderboard() {
             ))}
           </tbody>
           <tfoot>
+            {/* <tr className="hover:bg-gray-50 transition">
+              <th scope="row" colSpan={3} className="px-6 py-4 text-left">
+                My rank: 2
+              </th>
+              <td className="px-6 py-4 font-bold"> </td>
+            </tr> */}
             <tr className="hover:bg-gray-50 transition">
               <th scope="row" colSpan={3} className="px-6 py-4 text-left">
                 {t('averageScore')}
