@@ -1,12 +1,12 @@
 'use client';
 
 import React from 'react';
-import { useScore } from './ScoreProvider';
+import { useUser } from './UserProvider';
 import Button from './button/button';
 import { useTranslations } from 'next-intl';
 
 export default function ScoreHeader() {
-  const { score, multiplier, increaseMultiplier } = useScore();
+  const { score, multiplier, increaseMultiplierClick } = useUser();
   const t = useTranslations();
 
   return (
@@ -15,7 +15,7 @@ export default function ScoreHeader() {
         {t('currentScore')} {score}
       </span>
       <Button
-        onClick={increaseMultiplier}
+        onClick={increaseMultiplierClick}
         disabled={multiplier >= 5}
         className={[
           'select-none px-3 py-1 border rounded font-bold',

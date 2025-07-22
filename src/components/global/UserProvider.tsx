@@ -1,13 +1,14 @@
 'use client';
 
-import type { IScoreContextValue } from '@/interfaces';
+import type { IUserContextValue } from '@/interfaces/user-context-value';
 import React, { createContext, useContext, useEffect, useRef, useState } from 'react';
 import { usePathname } from 'next/navigation';
+import { generatePseudonym } from '@/lib';
 
-const ScoreContext = createContext<IScoreContextValue | null>(null);
+const UserContext = createContext<IUserContextValue | null>(null);
 
-export function useScore() {
-  const ctx = useContext(ScoreContext);
+export function useUser() {
+  const ctx = useContext(UserContext);
   if (!ctx) {
     throw new Error('useScore must be used within a <ScoreProvider>');
   }
@@ -16,10 +17,36 @@ export function useScore() {
 
 export default function ScoreProvider({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
-  const [score, setScore] = useState(20);
+  const [score, setScore] = useState(0);
   const [multiplier, setMultiplier] = useState(1);
+  const [name, setName] = useState('');
   const intervalRef = useRef(multiplier);
   const MAX_MULTIPLIER = 5;
+
+  useEffect(() => {
+    const pseudonym = generatePseudonym();
+    const fetchData = async () => {
+      const res = await fetch('/api/visit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name: pseudonym }),
+      });
+
+      if (res.ok) {
+        const data = (await res.json()) as { name: string; score: number; multiplier: string };
+        setName(data.name);
+        setScore(data.score);
+        setMultiplier(Number(data.multiplier));
+      } else {
+        setName(pseudonym);
+      }
+    };
+
+    fetchData().catch((err) => {
+      console.error(err);
+      setName(pseudonym);
+    });
+  }, []);
 
   useEffect(() => {
     window.increaseMultiplier = () => {
@@ -43,11 +70,11 @@ export default function ScoreProvider({ children }: { children: React.ReactNode 
       delete window.increaseMultiplier;
       delete window.hiddenSetScore;
     };
-  }, [setMultiplier, setScore, score]);
+  }, []);
 
   useEffect(() => {
     intervalRef.current = multiplier;
-  }, [multiplier]);
+  }, []);
 
   useEffect(() => {
     const id = setInterval(() => {
@@ -58,14 +85,17 @@ export default function ScoreProvider({ children }: { children: React.ReactNode 
 
   useEffect(() => {
     setScore((prev) => prev + 5 * multiplier);
-  }, [pathname, multiplier]);
+  }, [pathname]);
 
   const bumpScore = (by: number) => setScore((prev) => prev + by);
-  const increaseMultiplier = () => setMultiplier((m) => (m < MAX_MULTIPLIER ? m + 1 : m));
+  const increaseMultiplierClick = () =>
+    setMultiplier((m) => {
+      return m < MAX_MULTIPLIER ? +m + 1 : m;
+    });
 
   return (
-    <ScoreContext.Provider value={{ score, bumpScore, multiplier, increaseMultiplier }}>
+    <UserContext.Provider value={{ score, bumpScore, multiplier, increaseMultiplierClick, name }}>
       {children}
-    </ScoreContext.Provider>
+    </UserContext.Provider>
   );
 }

@@ -8,10 +8,9 @@ export async function GET() {
         users.id,
         users.uid,
         users.name,
-        scores.score
-      FROM scores
-      JOIN users ON scores.user_id = users.id
-      ORDER BY scores.score DESC
+        users.score
+      FROM users
+      ORDER BY users.score DESC
     `);
 
     return NextResponse.json(result.rows);

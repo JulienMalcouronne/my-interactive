@@ -1,2 +1,2 @@
 export * from './individual-carbon-fields';
-export type { IScoreContextValue } from './score-context-value';
+export type { IUserContextValue } from './user-context-value';
