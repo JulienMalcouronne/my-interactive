@@ -8,7 +8,7 @@ export default function Resume() {
   const numberOfYears = new Date().getFullYear() - 2021;
 
   return (
-    <div className="max-w-4xl mx-auto p-8 font-sans text-gray-800">
+    <div className="max-w-4xl mx-auto p-5 font-sans text-gray-800">
       <ResumeActions />
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -32,6 +32,29 @@ export default function Resume() {
                 <EnvelopeIcon className="size-4" />
                 <a href="mailto:malcouronnejulien@gmail.com" className="font-bold">
                   malcouronnejulien@gmail.com
+                </a>
+              </li>
+              <li className="flex items-center gap-2">
+                <svg
+                  className="size-4"
+                  stroke="currentColor"
+                  strokeWidth={1.5}
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.867 8.166 6.839 9.489.5.092.682-.217.682-.483 0-.237-.009-.868-.014-1.703-2.782.604-3.369-1.342-3.369-1.342-.454-1.154-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.004.07 1.532 1.032 1.532 1.032.892 1.529 2.341 1.088 2.91.832.091-.647.35-1.088.636-1.339-2.221-.253-4.555-1.112-4.555-4.951 0-1.093.39-1.987 1.029-2.686-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.025A9.564 9.564 0 0 1 12 6.844c.85.004 1.705.115 2.504.337 1.909-1.295 2.748-1.025 2.748-1.025.545 1.378.202 2.397.1 2.65.64.699 1.028 1.593 1.028 2.686 0 3.848-2.337 4.695-4.566 4.944.359.309.678.919.678 1.852 0 1.336-.012 2.417-.012 2.747 0 .268.18.579.688.481C19.135 20.162 22 16.418 22 12c0-5.523-4.477-10-10-10z"
+                  />
+                </svg>
+                <a
+                  href="https://github.com/JulienMalcouronne"
+                  className="font-bold"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  github.com/JulienMalcouronne
                 </a>
               </li>
             </ul>
