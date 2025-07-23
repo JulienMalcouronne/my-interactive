@@ -59,7 +59,7 @@ export default async function LocaleLayout({ children, params }: Props) {
           <main>
             <UserProvider>
               <div className="border-b z-[999] sticky top-0 left-0 right-0 bg-white bg-opacity-50 backdrop-blur-md">
-                <MainNavbar />
+                <MainNavbar key={locale} />
                 <div className="w-full px-4 py-2 border-b border-zinc-700 bg-white/90 backdrop-blur-sm dark:bg-zinc-900/80 dark:text-white flex flex-wrap items-center justify-between text-sm font-mono no-print">
                   <PseudonymDisplay />
                   <ScoreHeader />
