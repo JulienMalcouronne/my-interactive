@@ -10,7 +10,7 @@ export async function PATCH(req: NextRequest) {
   const fingerprint = `${ip}|${userAgent}`;
 
   const body = await req.json();
-  const fields: { [key: string]: any } = {};
+  const fields: { [key: string]: number | string } = {};
   const allowedFields = ['name', 'score', 'multiplier'];
 
   for (const key of allowedFields) {
