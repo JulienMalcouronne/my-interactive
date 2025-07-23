@@ -1,5 +1,6 @@
 import { headers } from 'next/headers';
 import { getTranslations } from 'next-intl/server';
+import CurrentUserRow from '@/components/leaderboard/current-user-row';
 
 type LeaderboardEntry = {
   id: number;
@@ -38,7 +39,6 @@ export default async function Leaderboard() {
 
   return (
     <div className="h-screen">
-      {/* <h1>Leaderboard</h1> */}
       <div className="w-full overflow-x-auto p-6">
         <table className="min-w-full divide-y divide-gray-200 rounded-xl overflow-hidden shadow-md bg-white text-sm text-gray-900">
           <caption className="caption-top text-lg font-semibold p-4 text-left">
@@ -48,9 +48,6 @@ export default async function Leaderboard() {
             <tr>
               <th scope="col" className="px-6 py-3 text-left">
                 {t('rank')}
-              </th>
-              <th scope="col" className="px-6 py-3 text-left">
-                {t('id')}
               </th>
               <th scope="col" className="px-6 py-3 text-left">
                 {t('name')}
@@ -66,21 +63,16 @@ export default async function Leaderboard() {
                 <td scope="row" className="px-6 py-4">
                   {index + 1}
                 </td>
-                <td className="px-6 py-4">{user.id}</td>
                 <td className="px-6 py-4">{user.name}</td>
                 <td className="px-6 py-4">{user.score}</td>
               </tr>
             ))}
           </tbody>
           <tfoot>
-            {/* <tr className="hover:bg-gray-50 transition">
-              <th scope="row" colSpan={3} className="px-6 py-4 text-left">
-                My rank: 2
-              </th>
-              <td className="px-6 py-4 font-bold"> </td>
-            </tr> */}
+            <CurrentUserRow users={users} />
+
             <tr className="hover:bg-gray-50 transition">
-              <th scope="row" colSpan={3} className="px-6 py-4 text-left">
+              <th scope="row" colSpan={2} className="px-6 py-4 text-left">
                 {t('averageScore')}
               </th>
               <td className="px-6 py-4 font-bold"> {averageScore}</td>

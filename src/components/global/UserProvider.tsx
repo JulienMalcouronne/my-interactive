@@ -1,17 +1,15 @@
 'use client';
 
-import type { IUserContextValue } from '@/interfaces/user-context-value';
-import React, { createContext, useContext, useEffect, useRef, useState } from 'react';
 import { usePathname } from 'next/navigation';
+import React, { createContext, useContext, useEffect, useRef, useState } from 'react';
 import { generatePseudonym } from '@/lib';
+import type { IUserContextValue } from '@/interfaces/user-context-value';
 
 const UserContext = createContext<IUserContextValue | null>(null);
 
 export function useUser() {
   const ctx = useContext(UserContext);
-  if (!ctx) {
-    throw new Error('useScore must be used within a <ScoreProvider>');
-  }
+  if (!ctx) throw new Error('useUser must be used within a <ScoreProvider>');
   return ctx;
 }
 
@@ -20,32 +18,44 @@ export default function ScoreProvider({ children }: { children: React.ReactNode 
   const [score, setScore] = useState(0);
   const [multiplier, setMultiplier] = useState(1);
   const [name, setName] = useState('');
+  const [uid, setUid] = useState('');
   const intervalRef = useRef(multiplier);
+  const latestScoreRef = useRef(score);
+  const latestMultiplierRef = useRef(multiplier);
   const MAX_MULTIPLIER = 5;
 
   useEffect(() => {
     const pseudonym = generatePseudonym();
-    const fetchData = async () => {
-      const res = await fetch('/api/visit', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name: pseudonym }),
-      });
 
-      if (res.ok) {
-        const data = (await res.json()) as { name: string; score: number; multiplier: string };
-        setName(data.name);
-        setScore(data.score);
-        setMultiplier(Number(data.multiplier));
-      } else {
+    const fetchData = async () => {
+      try {
+        const res = await fetch('/api/visit', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name: pseudonym }),
+        });
+
+        if (res.ok) {
+          const data = (await res.json()) as {
+            name: string;
+            score: number;
+            multiplier: string;
+            uid: string;
+          };
+          setName(data.name);
+          setScore(data.score);
+          setMultiplier(Number(data.multiplier));
+          setUid(data.uid);
+        } else {
+          setName(pseudonym);
+        }
+      } catch (err) {
+        console.error(err);
         setName(pseudonym);
       }
     };
 
-    fetchData().catch((err) => {
-      console.error(err);
-      setName(pseudonym);
-    });
+    fetchData();
   }, []);
 
   useEffect(() => {
@@ -54,16 +64,12 @@ export default function ScoreProvider({ children }: { children: React.ReactNode 
     };
 
     window.hiddenSetScore = (consoleScore?: number) => {
-      if (!consoleScore) {
-        return;
-      }
-
+      if (!consoleScore) return;
       if (consoleScore > 500) {
         console.log('Sorry you have been too greedy');
         return setScore(0);
       }
-
-      return setScore(score + consoleScore);
+      setScore((prev) => prev + consoleScore);
     };
 
     return () => {
@@ -74,7 +80,9 @@ export default function ScoreProvider({ children }: { children: React.ReactNode 
 
   useEffect(() => {
     intervalRef.current = multiplier;
-  }, []);
+    latestScoreRef.current = score;
+    latestMultiplierRef.current = multiplier;
+  }, [score, multiplier]);
 
   useEffect(() => {
     const id = setInterval(() => {
@@ -88,13 +96,34 @@ export default function ScoreProvider({ children }: { children: React.ReactNode 
   }, [pathname]);
 
   const bumpScore = (by: number) => setScore((prev) => prev + by);
-  const increaseMultiplierClick = () =>
-    setMultiplier((m) => {
-      return m < MAX_MULTIPLIER ? +m + 1 : m;
-    });
+  const increaseMultiplierClick = () => setMultiplier((m) => (m < MAX_MULTIPLIER ? m + 1 : m));
+
+  useEffect(() => {
+    const id = setInterval(() => {
+      const updateUser = async () => {
+        try {
+          await fetch('/api/users', {
+            method: 'PATCH',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              score: latestScoreRef.current,
+              multiplier: latestMultiplierRef.current,
+            }),
+          });
+        } catch (e) {
+          console.error('Failed to patch user state', e);
+        }
+      };
+      updateUser();
+    }, 5000);
+
+    return () => clearInterval(id);
+  }, []);
 
   return (
-    <UserContext.Provider value={{ score, bumpScore, multiplier, increaseMultiplierClick, name }}>
+    <UserContext.Provider
+      value={{ score, bumpScore, multiplier, increaseMultiplierClick, name, uid }}
+    >
       {children}
     </UserContext.Provider>
   );

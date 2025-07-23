@@ -4,6 +4,7 @@ interface IUserContextValue {
   bumpScore: (by: number) => void;
   increaseMultiplierClick: () => void;
   name: string;
+  uid: string;
 }
 
 export type { IUserContextValue };
