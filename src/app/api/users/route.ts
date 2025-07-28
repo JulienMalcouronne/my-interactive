@@ -26,7 +26,6 @@ export async function PATCH(req: NextRequest) {
     });
   }
 
-  // Build dynamic SET clause
   const updates = Object.keys(fields).map((key, i) => `${key} = $${i + 1}`);
   const values = Object.values(fields);
 
