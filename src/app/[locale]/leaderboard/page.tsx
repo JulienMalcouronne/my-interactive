@@ -38,7 +38,7 @@ export default async function Leaderboard() {
     : 0;
 
   return (
-    <div className="h-screen">
+    <div className="h-screen overflow-y-auto">
       <div className="w-full overflow-x-auto p-6">
         <table className="min-w-full divide-y divide-gray-200 rounded-xl overflow-hidden shadow-md bg-white text-sm text-gray-900">
           <caption className="caption-top text-lg font-semibold p-4 text-left">
