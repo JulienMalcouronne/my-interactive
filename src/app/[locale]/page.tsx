@@ -7,13 +7,13 @@ export default function Home() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-20 pb-16">
           <p className="mb-4 inline-flex items-center gap-2 rounded-full border border-slate-200 dark:border-slate-800 bg-white/70 dark:bg-slate-900/50 backdrop-blur px-3 py-1 text-xs text-slate-600 dark:text-slate-300">
             <span className="inline-block h-1.5 w-1.5 rounded-full bg-yellow-500"></span>
-            En poste, mais à l'écoute d'opportunités
+            En poste, mais à l&apos;écoute d&apos;opportunités
           </p>
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight leading-[1.05] text-gray-700">
             Julien Malcouronne
           </h1>
           <p className="mt-5 max-w-2xl text-lg sm:text-xl text-gray-600 ">
-            Front‑End & Full‑Stack Developer — je conçois des expériences web{' '}
+            Front‑End & Full‑Stack Developer — Je conçois des expériences web{' '}
             <span className="font-semibold">dynamiques</span>,{' '}
             <span className="font-semibold">accessibles</span> et{' '}
             <span className="font-semibold">durables</span>. Next.js · Nuxt · Design System ·
@@ -48,7 +48,7 @@ export default function Home() {
             Mon expertise
           </h2>
           <p className="mt-3 max-w-2xl text-gray-500">
-            Du design system à l'infra, j'aime livrer des produits soignés, performants et
+            Du design system à l&apos;infra, j&apos;aime livrer des produits soignés, performants et
             maintenables.
           </p>
           <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
