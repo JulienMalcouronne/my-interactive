@@ -1,6 +1,12 @@
 import { NextRequest } from 'next/server';
 import pool from '@/lib/db';
 
+type PatchBody = Partial<{
+  name: string;
+  score: number;
+  multiplier: number;
+}>;
+
 export async function PATCH(req: NextRequest) {
   const forwarded = req.headers.get('x-forwarded-for');
 
@@ -9,14 +15,18 @@ export async function PATCH(req: NextRequest) {
   const userAgent = req.headers.get('user-agent') || 'unknown';
   const fingerprint = `${ip}|${userAgent}`;
 
-  const body = await req.json();
-  const fields: { [key: string]: number | string } = {};
-  const allowedFields = ['name', 'score', 'multiplier'];
+  const body = (await req.json()) as PatchBody;
 
-  for (const key of allowedFields) {
-    if (body[key] !== undefined) {
-      fields[key] = body[key];
-    }
+  const fields: Record<string, string | number> = {};
+
+  if (typeof body.name === 'string') fields.name = body.name;
+
+  if (typeof body.score === 'number' && Number.isFinite(body.score)) {
+    fields.score = Math.round(body.score);
+  }
+
+  if (typeof body.multiplier === 'number' && Number.isFinite(body.multiplier)) {
+    fields.multiplier = body.multiplier;
   }
 
   if (Object.keys(fields).length === 0) {

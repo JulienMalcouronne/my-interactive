@@ -75,7 +75,7 @@ export default async function Leaderboard() {
               <th scope="row" colSpan={2} className="px-6 py-4 text-left">
                 {t('averageScore')}
               </th>
-              <td className="px-6 py-4 font-bold"> {averageScore}</td>
+              <td className="px-6 py-4 font-bold"> {Math.round(averageScore)}</td>
             </tr>
           </tfoot>
         </table>
