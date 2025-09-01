@@ -39,12 +39,12 @@ export default function ScoreProvider({ children }: { children: React.ReactNode 
           const data = (await res.json()) as {
             name: string;
             score: number;
-            multiplier: string;
+            multiplier: number;
             uid: string;
           };
           setName(data.name);
-          setScore(data.score);
-          setMultiplier(Number(data.multiplier));
+          setScore(data.score ?? 0);
+          setMultiplier(data.multiplier ?? 1);
           setUid(data.uid);
         } else {
           setName(pseudonym);
@@ -107,7 +107,7 @@ export default function ScoreProvider({ children }: { children: React.ReactNode 
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
               score: latestScoreRef.current ?? 0,
-              multiplier: latestMultiplierRef.current ?? 0,
+              multiplier: latestMultiplierRef.current ?? 1,
             }),
           });
         } catch (e) {
