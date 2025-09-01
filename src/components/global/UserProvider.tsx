@@ -106,8 +106,8 @@ export default function ScoreProvider({ children }: { children: React.ReactNode 
             method: 'PATCH',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-              score: latestScoreRef.current,
-              multiplier: latestMultiplierRef.current,
+              score: latestScoreRef.current ?? 0,
+              multiplier: latestMultiplierRef.current ?? 0,
             }),
           });
         } catch (e) {
