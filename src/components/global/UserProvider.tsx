@@ -38,13 +38,13 @@ export default function ScoreProvider({ children }: { children: React.ReactNode 
         if (res.ok) {
           const data = (await res.json()) as {
             name: string;
-            score: number;
-            multiplier: number;
+            score?: number;
+            multiplier: string;
             uid: string;
           };
           setName(data.name);
           setScore(data.score ?? 0);
-          setMultiplier(data.multiplier ?? 1);
+          setMultiplier(Number(data.multiplier ?? 1));
           setUid(data.uid);
         } else {
           setName(pseudonym);
