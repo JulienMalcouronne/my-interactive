@@ -1,8 +1,11 @@
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import Link from 'next/link';
 
 export default function Footer() {
   const t = useTranslations();
+  const locale = useLocale();
+
+  const localisedResumeUrl = `/documents/${locale === 'fr' ? 'CV' : 'RESUME'}_JULIEN_MALCOURONNE.pdf`;
 
   return (
     <footer className="sticky bottom-0 bg-neutral-900 text-white text-sm px-6 py-3 no-print">
@@ -52,9 +55,9 @@ export default function Footer() {
               </Link>
             </li>
             <li>
-              <Link href="/documents/CV_MALCOURONNE_JULIEN.pdf" target="_blank">
+              <a href={localisedResumeUrl} target="_blank">
                 {t('downloadCv')}
-              </Link>
+              </a>
             </li>
           </ul>
         </div>
