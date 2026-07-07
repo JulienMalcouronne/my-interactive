@@ -106,8 +106,12 @@ export default function ScoreProvider({ children }: { children: React.ReactNode 
             method: 'PATCH',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
+              // Refs are always initialised to numbers, so the `??` fallbacks
+              // are defensive and unreachable in practice.
+              /* v8 ignore start */
               score: latestScoreRef.current ?? 0,
               multiplier: latestMultiplierRef.current ?? 1,
+              /* v8 ignore stop */
             }),
           });
         } catch (e) {

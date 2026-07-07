@@ -13,6 +13,9 @@ export default function LanguageSwitcher() {
   const handleChange = (newLocale: string) => {
     const segments = pathname.split('/');
     segments[1] = newLocale;
+    // `segments` always keeps its leading segment, so the `|| '/'` guard is a
+    // defensive fallback that cannot be reached in practice.
+    /* v8 ignore next */
     const newPath = segments.join('/') || '/';
     router.push(newPath);
   };
