@@ -2,41 +2,42 @@ import React from 'react';
 import { UserIcon, MapPinIcon, EnvelopeIcon, PhoneIcon } from '@heroicons/react/24/outline';
 import ResumeActions from '@/components/resume/ResumeActions';
 import { useTranslations } from 'next-intl';
+import styles from './page.module.css';
 
 export default function Resume() {
   const t = useTranslations();
   const numberOfYears = new Date().getFullYear() - 2021;
 
   return (
-    <div className="max-w-4xl mx-auto p-5 font-sans text-gray-800">
+    <div className={styles.resume}>
       <ResumeActions />
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-        <aside className="space-y-6 print:order-2">
+      <div className={styles.grid}>
+        <aside className={styles.aside}>
           <div>
-            <h2 className="text-lg font-bold uppercase border-b pb-1 mb-2">{t('contact')}</h2>
-            <ul className="text-sm space-y-1">
-              <li className="flex items-center gap-2">
-                <UserIcon className="size-4" />
+            <h2 className={styles.sideHeading}>{t('contact')}</h2>
+            <ul className={styles.sideList}>
+              <li className={styles.contactItem}>
+                <UserIcon className={styles.icon} />
                 <span>Julien Malcouronne</span>
               </li>
-              <li className="flex items-center gap-2">
-                <MapPinIcon className="size-4" />
+              <li className={styles.contactItem}>
+                <MapPinIcon className={styles.icon} />
                 49100 Angers
               </li>
-              <li className="flex items-center gap-2">
-                <PhoneIcon className="size-4" />
+              <li className={styles.contactItem}>
+                <PhoneIcon className={styles.icon} />
                 <span>+33 6 95 34 46 37</span>
               </li>
-              <li className="flex items-center gap-2">
-                <EnvelopeIcon className="size-4" />
-                <a href="mailto:malcouronnejulien@gmail.com" className="font-bold">
+              <li className={styles.contactItem}>
+                <EnvelopeIcon className={styles.icon} />
+                <a href="mailto:malcouronnejulien@gmail.com" className={styles.bold}>
                   malcouronnejulien@gmail.com
                 </a>
               </li>
-              <li className="flex items-center gap-2">
+              <li className={styles.contactItem}>
                 <svg
-                  className="size-4"
+                  className={styles.icon}
                   stroke="currentColor"
                   strokeWidth={1.5}
                   viewBox="0 0 24 24"
@@ -50,7 +51,7 @@ export default function Resume() {
                 </svg>
                 <a
                   href="https://github.com/JulienMalcouronne"
-                  className="font-bold"
+                  className={styles.bold}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -61,10 +62,8 @@ export default function Resume() {
           </div>
 
           <div>
-            <h2 className="text-lg font-bold uppercase border-b pb-1 mb-2">
-              {t('lang', { count: 2 })}
-            </h2>
-            <ul className="text-sm space-y-1">
+            <h2 className={styles.sideHeading}>{t('lang', { count: 2 })}</h2>
+            <ul className={styles.sideList}>
               <li>
                 {t('french')} : {t('motherTongue')}
               </li>
@@ -75,10 +74,8 @@ export default function Resume() {
           </div>
 
           <div>
-            <h2 className="text-lg font-bold uppercase border-b pb-1 mb-2">
-              {t('skill', { count: 2 })}
-            </h2>
-            <ul className="text-sm space-y-1">
+            <h2 className={styles.sideHeading}>{t('skill', { count: 2 })}</h2>
+            <ul className={styles.sideList}>
               <li>Javascript, Typescript</li>
               <li>Vue.js, React, Next.js, Nuxt.js</li>
               <li>NestJS, ExpressJS</li>
@@ -90,10 +87,8 @@ export default function Resume() {
           </div>
 
           <div>
-            <h2 className="text-lg font-bold uppercase border-b pb-1 mb-2">
-              {t('interest', { count: 2 })}
-            </h2>
-            <ul className="text-sm space-y-1">
+            <h2 className={styles.sideHeading}>{t('interest', { count: 2 })}</h2>
+            <ul className={styles.sideList}>
               <li>{t('latinDances')}</li>
               <li>{t('padel')}</li>
               <li>{t('tennis')}</li>
@@ -102,37 +97,35 @@ export default function Resume() {
           </div>
         </aside>
 
-        <div className="md:col-span-2 space-y-8 print:order-1">
+        <div className={styles.main}>
           <section>
-            <h1 className="text-3xl font-bold mb-1">Julien Malcouronne</h1>
-            <p className="text-lg text-gray-600">
+            <h1 className={styles.name}>Julien Malcouronne</h1>
+            <p className={styles.subtitle}>
               {t('leadDeveloper')} | {t('fullStackDev')}
             </p>
           </section>
 
           <section>
-            <h2 className="text-xl font-semibold border-b pb-1 mb-2 uppercase">{t('profil')}</h2>
-            <p className="text-sm">{t('techLeadSection', { count: numberOfYears })}</p>
+            <h2 className={styles.mainHeading}>{t('profil')}</h2>
+            <p className={styles.profileText}>{t('techLeadSection', { count: numberOfYears })}</p>
           </section>
 
           <section>
-            <h2 className="text-xl font-semibold border-b pb-1 mb-2 uppercase">
-              {t('experience', { count: 2 })}
-            </h2>
-            <div className="space-y-4 text-sm">
+            <h2 className={styles.mainHeading}>{t('experience', { count: 2 })}</h2>
+            <div className={styles.expList}>
               <div>
-                <h3 className="font-bold">{t('leadDeveloper')} – ClimateSeed</h3>
-                <p className="italic text-xs">Septembre 2025 – {t('today')}</p>
-                <ul className="list-disc list-inside">
+                <h3 className={styles.jobTitle}>{t('leadDeveloper')} – ClimateSeed</h3>
+                <p className={styles.jobDate}>Septembre 2025 – {t('today')}</p>
+                <ul className={styles.bullets}>
                   <li>{t('leadDevFullStack')}</li>
                   <li>{t('leadDevBackendRust')}</li>
                   <li>{t('leadDevTechLeadership')}</li>
                 </ul>
               </div>
               <div>
-                <h3 className="font-bold">{t('techLeadFront')} – ClimateSeed</h3>
-                <p className="italic text-xs">Juin 2023 – Septembre 2025</p>
-                <ul className="list-disc list-inside">
+                <h3 className={styles.jobTitle}>{t('techLeadFront')} – ClimateSeed</h3>
+                <p className={styles.jobDate}>Juin 2023 – Septembre 2025</p>
+                <ul className={styles.bullets}>
                   <li>{t('manageTeam')}</li>
                   <li>{t('nuxtSsr')}</li>
                   <li>{t('architectOpti')}</li>
@@ -140,9 +133,9 @@ export default function Resume() {
                 </ul>
               </div>
               <div>
-                <h3 className="font-bold">{t('frontendDeveloper')} – ClimateSeed</h3>
-                <p className="italic text-xs">Mars 2022 – Mai 2023</p>
-                <ul className="list-disc list-inside">
+                <h3 className={styles.jobTitle}>{t('frontendDeveloper')} – ClimateSeed</h3>
+                <p className={styles.jobDate}>Mars 2022 – Mai 2023</p>
+                <ul className={styles.bullets}>
                   <li>{t('devInterfaces')}</li>
                   <li>{t('apiIntegration')}</li>
                   <li>{t('teamWork')}</li>
@@ -152,14 +145,12 @@ export default function Resume() {
           </section>
 
           <section>
-            <h2 className="text-xl font-semibold border-b pb-1 mb-2 uppercase">
-              {t('complementaryExperiences')}
-            </h2>
-            <div className="space-y-4 text-sm">
+            <h2 className={styles.mainHeading}>{t('complementaryExperiences')}</h2>
+            <div className={styles.expList}>
               <div>
-                <h3 className="font-bold">{t('businessDeveloper')}</h3>
-                <p className="italic text-xs">2016 – 2021</p>
-                <ul className="list-disc list-inside">
+                <h3 className={styles.jobTitle}>{t('businessDeveloper')}</h3>
+                <p className={styles.jobDate}>2016 – 2021</p>
+                <ul className={styles.bullets}>
                   <li>{t('commercialStrategy')}</li>
                   <li>{t('partnershipManagement')}</li>
                   <li>{t('marketAnalysis')}</li>
@@ -170,10 +161,8 @@ export default function Resume() {
           </section>
 
           <section>
-            <h2 className="text-xl font-semibold border-b pb-1 mb-2 uppercase">
-              {t('trainee', { count: 2 })}
-            </h2>
-            <ul className="list-disc list-inside text-sm space-y-1">
+            <h2 className={styles.mainHeading}>{t('trainee', { count: 2 })}</h2>
+            <ul className={styles.traineeList}>
               <li>Le Wagon – {t('webDevelopment')} (2021)</li>
               <li>Montpellier Business School – {t('masterSalesBusiness')} (2016 – 2020)</li>
               <li>

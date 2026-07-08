@@ -4,6 +4,7 @@ import type { IIndividualCarbonFields } from '@/interfaces';
 import { FormEvent, useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { calculateCO2 } from '@/lib';
+import styles from './page.module.css';
 
 export default function IndividualCarbon() {
   const t = useTranslations();
@@ -46,19 +47,17 @@ export default function IndividualCarbon() {
   };
 
   return (
-    <main className="max-w-2xl mx-auto p-6">
-      <div className="bg-neutral-900 bg-opacity-90 p-8 rounded-2xl shadow-xl">
-        <h1 className="text-2xl font-bold text-white mb-6">{t('calculateCarbonFootprint')}</h1>
-        <form className="space-y-5" onSubmit={handleSubmit}>
+    <main className={styles.main}>
+      <div className={styles.card}>
+        <h1 className={styles.title}>{t('calculateCarbonFootprint')}</h1>
+        <form className={styles.form} onSubmit={handleSubmit}>
           <div>
-            <label className="block mb-1 text-sm text-white font-semibold">
-              {t('transportMode')}
-            </label>
+            <label className={styles.label}>{t('transportMode')}</label>
             <select
               name="transportMode"
               value={form.transportMode}
               onChange={handleChange}
-              className="w-full px-4 py-2 rounded border border-neutral-700 bg-neutral-800 text-white"
+              className={styles.field}
             >
               <option value="car">{t('car')}</option>
               <option value="bus">{t('bus')}</option>
@@ -72,14 +71,12 @@ export default function IndividualCarbon() {
 
           {form.transportMode === 'car' && (
             <div>
-              <label className="block mb-1 text-sm text-white font-semibold">
-                {t('vehicleType')}
-              </label>
+              <label className={styles.label}>{t('vehicleType')}</label>
               <select
                 name="carType"
                 value={form.carType}
                 onChange={handleChange}
-                className="w-full px-4 py-2 rounded border border-neutral-700 bg-neutral-800 text-white"
+                className={styles.field}
               >
                 <option value="essence">{t('gas')}</option>
                 <option value="diesel">{t('diesel')}</option>
@@ -89,56 +86,48 @@ export default function IndividualCarbon() {
           )}
 
           <div>
-            <label className="block mb-1 text-sm text-white font-semibold">
-              {t('dailyCommuteKm')}
-            </label>
+            <label className={styles.label}>{t('dailyCommuteKm')}</label>
             <input
               type="number"
               name="dailyCommuteKm"
               min={0}
               value={form.dailyCommuteKm}
               onChange={handleChange}
-              className="w-full px-4 py-2 rounded border border-neutral-700 bg-neutral-800 text-white"
+              className={styles.field}
             />
           </div>
 
           <div>
-            <label className="block mb-1 text-sm text-white font-semibold">
-              {t('shortFlyPerYear')}
-            </label>
+            <label className={styles.label}>{t('shortFlyPerYear')}</label>
             <input
               type="number"
               name="shortFlightsPerYear"
               min={0}
               value={form.shortFlightsPerYear}
               onChange={handleChange}
-              className="w-full px-4 py-2 rounded border border-neutral-700 bg-neutral-800 text-white"
+              className={styles.field}
             />
           </div>
 
           <div>
-            <label className="block mb-1 text-sm text-white font-semibold">
-              {t('longFlyPerYear')}
-            </label>
+            <label className={styles.label}>{t('longFlyPerYear')}</label>
             <input
               type="number"
               name="longFlightsPerYear"
               min={0}
               value={form.longFlightsPerYear}
               onChange={handleChange}
-              className="w-full px-4 py-2 rounded border border-neutral-700 bg-neutral-800 text-white"
+              className={styles.field}
             />
           </div>
 
           <div>
-            <label className="block mb-1 text-sm text-white font-semibold">
-              {t('meatConsumption')}
-            </label>
+            <label className={styles.label}>{t('meatConsumption')}</label>
             <select
               name="meatConsumption"
               value={form.meatConsumption}
               onChange={handleChange}
-              className="w-full px-4 py-2 rounded border border-neutral-700 bg-neutral-800 text-white"
+              className={styles.field}
             >
               <option value="high">{t('high')}</option>
               <option value="medium">{t('average')}</option>
@@ -148,26 +137,24 @@ export default function IndividualCarbon() {
           </div>
 
           <div>
-            <label className="block mb-1 text-sm text-white font-semibold">
-              {t('homeSurface')}
-            </label>
+            <label className={styles.label}>{t('homeSurface')}</label>
             <input
               type="number"
               name="homeSize"
               min={1}
               value={form.homeSize}
               onChange={handleChange}
-              className="w-full px-4 py-2 rounded border border-neutral-700 bg-neutral-800 text-white"
+              className={styles.field}
             />
           </div>
 
           <div>
-            <label className="block mb-1 text-sm text-white font-semibold">{t('heating')}</label>
+            <label className={styles.label}>{t('heating')}</label>
             <select
               name="heating"
               value={form.heating}
               onChange={handleChange}
-              className="w-full px-4 py-2 rounded border border-neutral-700 bg-neutral-800 text-white"
+              className={styles.field}
             >
               <option value="gas">{t('gas')}</option>
               <option value="electric">{t('electric')}</option>
@@ -176,9 +163,9 @@ export default function IndividualCarbon() {
           </div>
 
           <div>
-            <label className="flex items-center gap-2 text-white cursor-pointer">
+            <label className={styles.checkboxLabel}>
               <input
-                className="cursor-pointer"
+                className={styles.checkbox}
                 type="checkbox"
                 name="isWellInsulated"
                 checked={form.isWellInsulated}
@@ -189,51 +176,42 @@ export default function IndividualCarbon() {
           </div>
 
           <div>
-            <label className="block mb-1 text-sm text-white font-semibold">
-              {t('nbPeopleLivingAtHome')}
-            </label>
+            <label className={styles.label}>{t('nbPeopleLivingAtHome')}</label>
             <input
               type="number"
               name="peopleInHousehold"
               min={1}
               value={form.peopleInHousehold}
               onChange={handleChange}
-              className="w-full px-4 py-2 rounded border border-neutral-700 bg-neutral-800 text-white"
+              className={styles.field}
             />
           </div>
 
           <div>
-            <label className="block mb-1 text-sm text-white font-semibold">
-              {t('clothesBoughtPerYear')}
-            </label>
+            <label className={styles.label}>{t('clothesBoughtPerYear')}</label>
             <input
               type="number"
               name="clothesPerYear"
               min={0}
               value={form.clothesPerYear}
               onChange={handleChange}
-              className="w-full px-4 py-2 rounded border border-neutral-700 bg-neutral-800 text-white"
+              className={styles.field}
             />
           </div>
 
           <div>
-            <label className="block mb-1 text-sm text-white font-semibold">
-              {t('electronicalGoodsPurchasedPerYear')}
-            </label>
+            <label className={styles.label}>{t('electronicalGoodsPurchasedPerYear')}</label>
             <input
               type="number"
               name="devicesPerYear"
               min={0}
               value={form.devicesPerYear}
               onChange={handleChange}
-              className="w-full px-4 py-2 rounded border border-neutral-700 bg-neutral-800 text-white"
+              className={styles.field}
             />
           </div>
 
-          <button
-            type="submit"
-            className="w-full bg-green-600 hover:bg-green-700 text-white font-semibold px-6 py-3 rounded shadow transition cursor-pointer"
-          >
+          <button type="submit" className={styles.submit}>
             {t('calculateMyCarbonFootprint')}
           </button>
         </form>

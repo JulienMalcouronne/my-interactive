@@ -1,5 +1,6 @@
 import { useLocale, useTranslations } from 'next-intl';
 import Link from 'next/link';
+import styles from './footer.module.css';
 
 export default function Footer() {
   const t = useTranslations();
@@ -8,17 +9,17 @@ export default function Footer() {
   const localisedResumeUrl = `/documents/${locale === 'fr' ? 'CV' : 'RESUME'}_JULIEN_MALCOURONNE.pdf`;
 
   return (
-    <footer className="sticky bottom-0 bg-neutral-900 text-white text-sm px-6 py-3 no-print">
-      <div className="max-w-screen-xl mx-auto flex flex-wrap justify-between items-start gap-y-4">
-        <div className="space-y-1">
-          <p className="font-bold">Julien Malcouronne</p>
+    <footer className={`${styles.footer} no-print`}>
+      <div className={styles.inner}>
+        <div className={styles.column}>
+          <p className={styles.title}>Julien Malcouronne</p>
           <p>{t('frontendDeveloper')}</p>
-          <p className="text-xs text-gray-400">© 2025 – {t('madeWith')} Next.js</p>
+          <p className={styles.copyright}>© 2025 – {t('madeWith')} Next.js</p>
         </div>
 
-        <div className="space-y-1">
-          <p className="font-bold">{t('navigation')}</p>
-          <ul className="flex flex-wrap gap-x-6 gap-y-1">
+        <div className={styles.column}>
+          <p className={styles.title}>{t('navigation')}</p>
+          <ul className={styles.links}>
             <li>
               <Link href="/">{t('home')}</Link>
             </li>
@@ -38,9 +39,9 @@ export default function Footer() {
           </ul>
         </div>
 
-        <div className="space-y-1">
-          <p className="font-bold">{t('contact')}</p>
-          <ul className="flex flex-wrap gap-x-6 gap-y-1">
+        <div className={styles.column}>
+          <p className={styles.title}>{t('contact')}</p>
+          <ul className={styles.links}>
             <li>
               <Link href="mailto:malcouronnejulien@gmail.com">{t('email')}</Link>
             </li>

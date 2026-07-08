@@ -1,0 +1,35 @@
+.button {
+  padding: 0.5rem 1rem;
+  color: var(--white);
+  border-radius: var(--radius);
+  transition: background-color 150ms ease;
+  cursor: pointer;
+}
+
+.blue {
+  background: var(--blue-600);
+}
+.blue:hover {
+  background: var(--blue-700);
+}
+
+.red {
+  background: var(--red-600);
+}
+.red:hover {
+  background: var(--red-700);
+}
+
+.green {
+  background: var(--green-600);
+}
+.green:hover {
+  background: var(--green-700);
+}
+
+.default {
+  background: var(--gray-600);
+}
+.default:hover {
+  background: var(--gray-700);
+}

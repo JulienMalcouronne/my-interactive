@@ -6,6 +6,7 @@ import { useState, useEffect, useMemo } from 'react';
 import RotatingSphere from './RotatingSphere';
 import GlobeDot from './GlobeDot';
 import { useTranslations } from 'next-intl';
+import styles from './Earth.module.css';
 
 export default function Earth() {
   const t = useTranslations();
@@ -47,7 +48,7 @@ export default function Earth() {
   );
 
   return (
-    <div className="w-screen h-[calc(100vh-128px)] relative">
+    <div className={styles.container}>
       <Canvas camera={{ position: [0, 2, 15], fov: 45 }} style={{ background: 'black' }}>
         <Stars radius={100} depth={50} count={10000} factor={4} saturation={0} fade speed={1} />
         <ambientLight intensity={0.6} />
@@ -68,10 +69,10 @@ export default function Earth() {
         <GlobeDot radius={5} altitude={1} />
       </Canvas>
 
-      <div className="absolute top-4 left-4 text-white bg-black/60 px-4 py-2 rounded shadow">
+      <div className={styles.overlay}>
         {t('offset', { count: 567 })} → X: {Math.round(offset.x) % 360}°, Y:{' '}
         {Math.round(offset.y) % 360}°, Z: {Math.round(offset.z) % 360}°
-        <div className="mt-1 text-xs">
+        <div className={styles.hint}>
           {t('use')} ↑/↓ = {t('pitch')}, ←/→ = {t('yaw')}, Q/E = {t('roll')}
         </div>
       </div>

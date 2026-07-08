@@ -8,6 +8,7 @@ import PseudonymDisplay from '@/components/global/PseudonymDisplay';
 import ScoreHeader from '@/components/global/ScoreHeader';
 import Footer from '@/components/global/footer/Footer';
 import UserProvider from '@/components/global/UserProvider';
+import styles from './layout.module.css';
 
 type Props = {
   children: ReactNode;
@@ -54,13 +55,16 @@ export default async function LocaleLayout({ children, params }: Props) {
 
   return (
     <html lang={locale} key={locale}>
-      <body>
+      {/* suppressHydrationWarning: some browser extensions (e.g. ColorZilla adds
+          `cz-shortcut-listen`) mutate <body> before hydration, which would
+          otherwise trigger a hydration mismatch warning. */}
+      <body suppressHydrationWarning>
         <NextIntlClientProvider>
           <main>
             <UserProvider>
-              <div className="border-b z-[999] sticky top-0 left-0 right-0 bg-white bg-opacity-50 backdrop-blur-md">
+              <div className={styles.stickyHeader}>
                 <MainNavbar />
-                <div className="w-full px-4 py-2 border-b border-zinc-700 bg-white/90 backdrop-blur-sm dark:bg-zinc-900/80 dark:text-white flex flex-wrap items-center justify-between text-sm font-mono no-print">
+                <div className={`${styles.scoreBar} no-print`}>
                   <PseudonymDisplay />
                   <ScoreHeader />
                 </div>

@@ -1,6 +1,7 @@
 'use client';
 import React from 'react';
 import { useUser } from '../global/UserProvider';
+import styles from './current-user-row.module.css';
 
 type Props = { users: { uid: string; score: number }[] };
 
@@ -10,11 +11,11 @@ export default function CurrentUserRow({ users }: Props) {
   const currentUser = index >= 0 ? users[index] : null;
 
   return (
-    <tr className="hover:bg-gray-50 transition">
-      <th scope="row" colSpan={2} className="px-6 py-4 text-left">
+    <tr className={styles.row}>
+      <th scope="row" colSpan={2} className={styles.rankHead}>
         {currentUser ? `My rank: ${index + 1}` : 'My rank: —'}
       </th>
-      <td className="px-6 py-4 font-bold">{currentUser ? currentUser.score : '—'}</td>
+      <td className={styles.score}>{currentUser ? currentUser.score : '—'}</td>
     </tr>
   );
 }

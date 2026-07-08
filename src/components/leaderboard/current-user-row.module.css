@@ -1,0 +1,16 @@
+.row {
+  transition: background-color 150ms ease;
+}
+.row:hover {
+  background: var(--gray-50);
+}
+
+.rankHead {
+  padding: 1rem 1.5rem;
+  text-align: left;
+}
+
+.score {
+  padding: 1rem 1.5rem;
+  font-weight: 700;
+}

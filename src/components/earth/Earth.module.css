@@ -1,0 +1,21 @@
+.container {
+  width: 100vw;
+  height: calc(100vh - 128px);
+  position: relative;
+}
+
+.overlay {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  color: var(--white);
+  background: rgba(0, 0, 0, 0.6);
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-md);
+}
+
+.hint {
+  margin-top: 0.25rem;
+  font-size: 0.75rem;
+}

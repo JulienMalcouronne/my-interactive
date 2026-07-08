@@ -5,6 +5,7 @@ import { useLocale, useTranslations } from 'next-intl';
 import { usePathname } from 'next/navigation';
 import { getLocalizedHref, SupportedLocale } from '@/lib/localizedRoutes';
 import LanguageSwitcher from './LangSwitcher';
+import styles from './MainNavbar.module.css';
 
 const NAV_ITEMS = [
   { basePath: '/', label: 'home' },
@@ -23,11 +24,11 @@ export default function MainNavbar() {
   const currentPath = stripLocalePrefix(pathname);
 
   return (
-    <nav className="gap-4 px-5 py-3 bg-black flex items-center ">
+    <nav className={styles.nav}>
       <Link href="/">
-        <img className="w-15" src="/images/icon.png"></img>
+        <img className={styles.logo} src="/images/icon.png"></img>
       </Link>
-      <ul className="flex gap-4 w-full flex-wrap">
+      <ul className={styles.list}>
         {NAV_ITEMS.map((item) => {
           const { basePath, label } = item;
           const rightAlign = 'rightAlign' in item ? item.rightAlign : false;
@@ -36,13 +37,8 @@ export default function MainNavbar() {
           const isActive = currentPath === normalizedHref;
 
           return (
-            <li key={basePath} className={rightAlign ? 'flex-1 text-right' : ''}>
-              <Link
-                href={localizedHref}
-                className={`transition-colors duration-200 ${
-                  isActive ? 'text-green-400' : 'text-gray-400 hover:text-gray-200'
-                }`}
-              >
+            <li key={basePath} className={rightAlign ? styles.rightAlign : ''}>
+              <Link href={localizedHref} className={isActive ? styles.active : styles.link}>
                 {t(label)}
               </Link>
             </li>

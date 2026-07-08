@@ -1,5 +1,6 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import Button from './button';
+import styles from './button.module.css';
 import { expect, test, vi } from 'vitest';
 
 test('renders and clicks the button', () => {
@@ -25,7 +26,7 @@ test('button has correct background color', () => {
     </Button>
   );
   const button = getByRole('button', { name: /click me/i });
-  expect(button).toHaveClass('bg-green-600');
+  expect(button).toHaveClass(styles.green);
 });
 
 test('button is disabled when contain disabled attribute', () => {

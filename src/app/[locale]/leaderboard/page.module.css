@@ -1,0 +1,59 @@
+.wrapper {
+  width: 100%;
+  overflow-x: auto;
+  padding: 2rem;
+}
+
+.table {
+  min-width: 100%;
+  border-collapse: collapse;
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+  background: var(--white);
+  font-size: 0.875rem;
+  color: var(--gray-900);
+}
+
+.caption {
+  caption-side: top;
+  font-size: 1.125rem;
+  font-weight: 600;
+  padding: 1rem;
+  text-align: left;
+}
+
+.thead {
+  background: var(--gray-100);
+  color: var(--gray-700);
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+}
+
+.headCell {
+  padding: 0.75rem 1.5rem;
+  text-align: left;
+}
+
+.row {
+  transition: background-color 150ms ease;
+  border-top: 1px solid var(--gray-200);
+}
+.row:hover {
+  background: var(--gray-50);
+}
+
+.cell {
+  padding: 1rem 1.5rem;
+}
+
+.footRowHead {
+  padding: 1rem 1.5rem;
+  text-align: left;
+}
+
+.footScore {
+  padding: 1rem 1.5rem;
+  font-weight: 700;
+}

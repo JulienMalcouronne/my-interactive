@@ -2,6 +2,7 @@
 
 import { useLocale } from 'next-intl';
 import { usePathname, useRouter } from 'next/navigation';
+import styles from './LangSwitcher.module.css';
 
 export default function LanguageSwitcher() {
   const locale = useLocale();
@@ -21,11 +22,7 @@ export default function LanguageSwitcher() {
   };
 
   return (
-    <select
-      value={locale}
-      onChange={(e) => handleChange(e.target.value)}
-      className="bg-black text-white border border-gray-500 p-1 rounded"
-    >
+    <select value={locale} onChange={(e) => handleChange(e.target.value)} className={styles.select}>
       {availableLocales.map((loc) => (
         <option key={loc} value={loc}>
           {loc.toUpperCase()}

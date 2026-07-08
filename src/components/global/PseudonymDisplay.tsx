@@ -1,9 +1,10 @@
 'use client';
 
 import { useUser } from './UserProvider';
+import styles from './PseudonymDisplay.module.css';
 
 export default function PseudonymDisplay() {
   const { name } = useUser();
 
-  return <input type="text" defaultValue={name} className="ml-2 px-2 py-1 border rounded" />;
+  return <input type="text" defaultValue={name} className={styles.input} />;
 }
