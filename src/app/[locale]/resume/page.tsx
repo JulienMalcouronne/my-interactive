@@ -95,6 +95,8 @@ export default function Resume() {
             </h2>
             <ul className="text-sm space-y-1">
               <li>{t('latinDances')}</li>
+              <li>{t('padel')}</li>
+              <li>{t('tennis')}</li>
               <li>{t('travel', { count: 2 })}</li>
             </ul>
           </div>
@@ -104,7 +106,7 @@ export default function Resume() {
           <section>
             <h1 className="text-3xl font-bold mb-1">Julien Malcouronne</h1>
             <p className="text-lg text-gray-600">
-              {t('techLeadFront')} | {t('webDev')}
+              {t('leadDeveloper')} | {t('fullStackDev')}
             </p>
           </section>
 
@@ -119,10 +121,20 @@ export default function Resume() {
             </h2>
             <div className="space-y-4 text-sm">
               <div>
+                <h3 className="font-bold">{t('leadDeveloper')} – ClimateSeed</h3>
+                <p className="italic text-xs">Septembre 2025 – {t('today')}</p>
+                <ul className="list-disc list-inside">
+                  <li>{t('leadDevFullStack')}</li>
+                  <li>{t('leadDevBackendRust')}</li>
+                  <li>{t('leadDevTechLeadership')}</li>
+                </ul>
+              </div>
+              <div>
                 <h3 className="font-bold">{t('techLeadFront')} – ClimateSeed</h3>
-                <p className="italic text-xs">Juin 2023 – {t('today')}</p>
+                <p className="italic text-xs">Juin 2023 – Septembre 2025</p>
                 <ul className="list-disc list-inside">
                   <li>{t('manageTeam')}</li>
+                  <li>{t('nuxtSsr')}</li>
                   <li>{t('architectOpti')}</li>
                   <li>{t('coordinateProduct')}</li>
                 </ul>
