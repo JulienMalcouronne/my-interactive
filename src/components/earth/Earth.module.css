@@ -9,7 +9,7 @@
   top: 1rem;
   left: 1rem;
   color: var(--white);
-  background: rgba(0, 0, 0, 0.6);
+  background: var(--overlay);
   padding: 0.5rem 1rem;
   border-radius: var(--radius);
   box-shadow: var(--shadow-md);

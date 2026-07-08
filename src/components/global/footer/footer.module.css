@@ -1,8 +1,9 @@
 .footer {
   position: sticky;
   bottom: 0;
-  background: var(--neutral-900);
-  color: var(--white);
+  background: var(--panel-bg);
+  color: var(--panel-text);
+  border-top: 1px solid var(--panel-border);
   font-size: 0.875rem;
   padding: 0.75rem 1.5rem;
 }
@@ -29,7 +30,7 @@
 
 .copyright {
   font-size: 0.75rem;
-  color: var(--gray-400);
+  color: var(--panel-muted);
 }
 
 .links {

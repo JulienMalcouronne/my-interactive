@@ -10,9 +10,10 @@
   border-radius: var(--radius-xl);
   overflow: hidden;
   box-shadow: var(--shadow-md);
-  background: var(--white);
+  border: 1px solid var(--surface-border);
+  background: var(--surface);
   font-size: 0.875rem;
-  color: var(--gray-900);
+  color: var(--foreground);
 }
 
 .caption {
@@ -24,8 +25,8 @@
 }
 
 .thead {
-  background: var(--gray-100);
-  color: var(--gray-700);
+  background: var(--surface-border);
+  color: var(--text-muted);
   text-transform: uppercase;
   font-size: 0.75rem;
   letter-spacing: 0.05em;
@@ -38,10 +39,10 @@
 
 .row {
   transition: background-color 150ms ease;
-  border-top: 1px solid var(--gray-200);
+  border-top: 1px solid var(--divider);
 }
 .row:hover {
-  background: var(--gray-50);
+  background: color-mix(in srgb, var(--foreground) 5%, transparent);
 }
 
 .cell {

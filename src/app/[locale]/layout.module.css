@@ -4,8 +4,8 @@
   left: 0;
   right: 0;
   z-index: 999;
-  border-bottom: 1px solid var(--gray-200);
-  background: rgba(255, 255, 255, 0.5);
+  border-bottom: 1px solid var(--surface-border);
+  background: var(--header-glass);
   backdrop-filter: blur(12px);
 }
 
@@ -15,17 +15,18 @@
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
+  gap: 0.75rem;
   padding: 0.5rem 1rem;
-  border-bottom: 1px solid var(--zinc-700);
-  background: rgba(255, 255, 255, 0.9);
+  border-bottom: 1px solid var(--divider);
+  background: var(--header-glass-solid);
   backdrop-filter: blur(4px);
   font-size: 0.875rem;
-  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-family: var(--font-mono);
+  color: var(--foreground);
 }
 
-@media (prefers-color-scheme: dark) {
-  .scoreBar {
-    background: rgba(24, 24, 27, 0.8);
-    color: var(--white);
-  }
+.scoreBarRight {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
 }

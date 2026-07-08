@@ -38,12 +38,12 @@
   align-items: center;
   gap: 0.5rem;
   border-radius: 9999px;
-  border: 1px solid var(--slate-200);
-  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid var(--badge-border);
+  background: var(--badge-bg);
   backdrop-filter: blur(8px);
   padding: 0.25rem 0.75rem;
   font-size: 0.75rem;
-  color: var(--slate-600);
+  color: var(--badge-text);
 }
 .badgeDot {
   display: inline-block;
@@ -58,13 +58,13 @@
   font-weight: 800;
   letter-spacing: -0.025em;
   line-height: 1.05;
-  color: var(--gray-700);
+  color: var(--text-strong);
 }
 .heroText {
   margin-top: 1.25rem;
   max-width: 42rem;
   font-size: 1.125rem;
-  color: var(--gray-600);
+  color: var(--text-muted);
 }
 .semibold {
   font-weight: 600;
@@ -94,12 +94,12 @@
   font-size: 1.5rem;
   font-weight: 700;
   letter-spacing: -0.025em;
-  color: var(--gray-700);
+  color: var(--text-strong);
 }
 .sectionSubtitle {
   margin-top: 0.75rem;
   max-width: 42rem;
-  color: var(--gray-500);
+  color: var(--text-subtle);
 }
 @media (min-width: 640px) {
   .sectionTitle {
@@ -127,9 +127,9 @@
 
 .featureCard {
   border-radius: var(--radius-2xl);
-  border: 1px solid var(--slate-200);
+  border: 1px solid var(--surface-border);
   padding: 1.25rem;
-  background: var(--white);
+  background: var(--surface);
   box-shadow: var(--shadow-soft);
 }
 .featureIcon {
@@ -142,7 +142,7 @@
 .featureText {
   margin-top: 0.5rem;
   font-size: 0.875rem;
-  color: var(--slate-600);
+  color: var(--surface-text);
 }
 
 /* Projects ---------------------------------------------------------------- */
@@ -175,21 +175,21 @@
 .projectCard {
   overflow: hidden;
   border-radius: var(--radius-2xl);
-  border: 1px solid var(--slate-200);
-  background: var(--white);
+  border: 1px solid var(--surface-border);
+  background: var(--surface);
   box-shadow: var(--shadow-soft);
 }
 .projectMedia {
   aspect-ratio: 16 / 9;
 }
 .mediaA {
-  background: linear-gradient(to bottom right, #bae6fd, #f5d0fe);
+  background: linear-gradient(to bottom right, var(--sky-200), var(--fuchsia-200));
 }
 .mediaB {
-  background: linear-gradient(to bottom right, #a7f3d0, #a5f3fc);
+  background: linear-gradient(to bottom right, var(--emerald-200), var(--cyan-200));
 }
 .mediaC {
-  background: linear-gradient(to bottom right, #fde68a, #fecdd3);
+  background: linear-gradient(to bottom right, var(--amber-200), var(--rose-200));
 }
 .projectBody {
   padding: 1.25rem;
@@ -204,7 +204,7 @@
 .projectText {
   margin-top: 0.5rem;
   font-size: 0.875rem;
-  color: var(--slate-600);
+  color: var(--surface-text);
 }
 .tagRow {
   margin-top: 0.75rem;
@@ -212,11 +212,11 @@
   flex-wrap: wrap;
   gap: 0.5rem;
   font-size: 0.75rem;
-  color: var(--slate-600);
+  color: var(--surface-text);
 }
 .tag {
   border-radius: var(--radius-lg);
-  border: 1px solid var(--slate-200);
+  border: 1px solid var(--surface-border);
   padding: 0.25rem 0.5rem;
 }
 .linkRow {
@@ -246,39 +246,13 @@
 .approachCard {
   margin-top: 1.5rem;
   border-radius: var(--radius-2xl);
-  border: 1px solid var(--slate-200);
-  background: var(--white);
+  border: 1px solid var(--surface-border);
+  background: var(--surface);
   padding: 1.5rem;
   box-shadow: var(--shadow-soft);
 }
 .approachText {
   font-size: 1.125rem;
   line-height: 1.75;
-  color: var(--slate-700);
-}
-
-/* Dark mode --------------------------------------------------------------- */
-@media (prefers-color-scheme: dark) {
-  .badge {
-    border-color: var(--slate-800);
-    background: rgba(15, 23, 42, 0.5);
-    color: var(--slate-300);
-  }
-  .featureCard,
-  .projectCard,
-  .approachCard {
-    border-color: var(--slate-800);
-    background: var(--slate-900);
-  }
-  .featureText,
-  .projectText,
-  .tagRow {
-    color: var(--slate-300);
-  }
-  .tag {
-    border-color: var(--slate-800);
-  }
-  .approachText {
-    color: var(--slate-200);
-  }
+  color: var(--surface-text);
 }

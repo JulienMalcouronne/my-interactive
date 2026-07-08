@@ -2,15 +2,8 @@
   max-width: 56rem;
   margin-inline: auto;
   padding: 1.25rem;
-  font-family:
-    ui-sans-serif,
-    system-ui,
-    -apple-system,
-    'Segoe UI',
-    Roboto,
-    Arial,
-    sans-serif;
-  color: var(--gray-800);
+  font-family: var(--font-sans);
+  color: var(--foreground);
 }
 
 .grid {
@@ -45,7 +38,7 @@
   font-size: 1.125rem;
   font-weight: 700;
   text-transform: uppercase;
-  border-bottom: 1px solid var(--gray-300);
+  border-bottom: 1px solid var(--divider);
   padding-bottom: 0.25rem;
   margin-bottom: 0.5rem;
 }
@@ -82,14 +75,14 @@
 
 .subtitle {
   font-size: 1.125rem;
-  color: var(--gray-600);
+  color: var(--text-muted);
 }
 
 .mainHeading {
   font-size: 1.25rem;
   font-weight: 600;
   text-transform: uppercase;
-  border-bottom: 1px solid var(--gray-300);
+  border-bottom: 1px solid var(--divider);
   padding-bottom: 0.25rem;
   margin-bottom: 0.5rem;
 }

@@ -1,7 +1,7 @@
 .select {
-  background: var(--black);
-  color: var(--white);
-  border: 1px solid var(--gray-500);
+  background: var(--background);
+  color: var(--foreground);
+  border: 1px solid var(--panel-border);
   padding: 0.25rem;
   border-radius: var(--radius);
 }

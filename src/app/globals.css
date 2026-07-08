@@ -51,6 +51,21 @@
   --sky-700: #0369a1;
   --yellow-500: #eab308;
 
+  /* Pastels (project card gradients) */
+  --sky-200: #bae6fd;
+  --fuchsia-200: #f5d0fe;
+  --emerald-200: #a7f3d0;
+  --cyan-200: #a5f3fc;
+  --amber-200: #fde68a;
+  --rose-200: #fecdd3;
+
+  /* Surfaces that stay dark regardless of theme */
+  --overlay: color-mix(in srgb, var(--black) 60%, transparent);
+
+  /* Typography */
+  --font-sans: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+
   /* Radii & shadows */
   --radius: 0.25rem;
   --radius-lg: 0.75rem;
@@ -61,10 +76,69 @@
   --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground: #ededed;
-  }
+/* ==========================================================================
+   Semantic theme tokens
+   Light values live on :root; dark values on :root[data-theme='dark'].
+   The theme is resolved to an explicit value before paint by the inline
+   script in the layout (stored preference, otherwise the OS setting), so no
+   `prefers-color-scheme` media query is needed here.
+   ========================================================================== */
+:root {
+  --text-strong: var(--gray-700);
+  --text-muted: var(--gray-600);
+  --text-subtle: var(--gray-500);
+
+  --surface: var(--white);
+  --surface-border: var(--slate-200);
+  --surface-text: var(--slate-600);
+
+  --score-text: var(--zinc-600);
+  --divider: var(--gray-300);
+
+  --header-glass: color-mix(in srgb, var(--white) 50%, transparent);
+  --header-glass-solid: color-mix(in srgb, var(--white) 90%, transparent);
+
+  --badge-bg: color-mix(in srgb, var(--white) 70%, transparent);
+  --badge-border: var(--slate-200);
+  --badge-text: var(--slate-600);
+
+  /* Chrome panels (navbar, footer, form cards) */
+  --panel-bg: var(--white);
+  --panel-text: var(--foreground);
+  --panel-muted: var(--gray-500);
+  --panel-border: var(--gray-200);
+
+  /* Brand accent, contrast-adjusted per theme */
+  --accent: var(--green-600);
+}
+
+:root[data-theme='dark'] {
+  --background: #0a0a0a;
+  --foreground: #ededed;
+
+  --text-strong: var(--gray-100);
+  --text-muted: var(--slate-300);
+  --text-subtle: var(--gray-400);
+
+  --surface: var(--slate-900);
+  --surface-border: var(--slate-800);
+  --surface-text: var(--slate-300);
+
+  --score-text: var(--zinc-300);
+  --divider: var(--slate-700);
+
+  --header-glass: color-mix(in srgb, var(--slate-900) 55%, transparent);
+  --header-glass-solid: color-mix(in srgb, var(--slate-900) 85%, transparent);
+
+  --badge-bg: color-mix(in srgb, var(--slate-900) 50%, transparent);
+  --badge-border: var(--slate-800);
+  --badge-text: var(--slate-300);
+
+  --panel-bg: var(--neutral-900);
+  --panel-muted: var(--gray-400);
+  --panel-border: var(--neutral-700);
+
+  --accent: var(--green-400);
 }
 
 /* ==========================================================================

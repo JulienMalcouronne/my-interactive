@@ -2,7 +2,7 @@
   transition: background-color 150ms ease;
 }
 .row:hover {
-  background: var(--gray-50);
+  background: color-mix(in srgb, var(--foreground) 5%, transparent);
 }
 
 .rankHead {
