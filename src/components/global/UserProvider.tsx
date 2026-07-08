@@ -7,6 +7,10 @@ import type { IUserContextValue } from '@/interfaces/user-context-value';
 
 const UserContext = createContext<IUserContextValue | null>(null);
 
+// The score is persisted on a slow interval (fallback) and, above all, whenever
+// the tab is backgrounded/closed — far fewer writes than the old 5s loop.
+const SAVE_INTERVAL_MS = 30000;
+
 export function useUser() {
   const ctx = useContext(UserContext);
   if (!ctx) throw new Error('useUser must be used within a <ScoreProvider>');
@@ -22,6 +26,7 @@ export default function ScoreProvider({ children }: { children: React.ReactNode 
   const intervalRef = useRef(multiplier);
   const latestScoreRef = useRef(score);
   const latestMultiplierRef = useRef(multiplier);
+  const lastSavedRef = useRef<number | null>(null);
   const MAX_MULTIPLIER = 5;
 
   useEffect(() => {
@@ -99,29 +104,35 @@ export default function ScoreProvider({ children }: { children: React.ReactNode 
   const increaseMultiplierClick = () => setMultiplier((m) => (m < MAX_MULTIPLIER ? m + 1 : m));
 
   useEffect(() => {
-    const id = setInterval(() => {
-      const updateUser = async () => {
-        try {
-          await fetch('/api/users', {
-            method: 'PATCH',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              // Refs are always initialised to numbers, so the `??` fallbacks
-              // are defensive and unreachable in practice.
-              /* v8 ignore start */
-              score: latestScoreRef.current ?? 0,
-              multiplier: latestMultiplierRef.current ?? 1,
-              /* v8 ignore stop */
-            }),
-          });
-        } catch (e) {
-          console.error('Failed to patch user state', e);
-        }
-      };
-      updateUser();
-    }, 5000);
+    const saveUserState = (keepalive = false) => {
+      const score = latestScoreRef.current;
+      // Skip redundant writes when nothing changed since the last save.
+      if (lastSavedRef.current === score) return;
+      lastSavedRef.current = score;
 
-    return () => clearInterval(id);
+      // `keepalive` lets the request survive the page being unloaded.
+      fetch('/api/users', {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ score, multiplier: latestMultiplierRef.current }),
+        keepalive,
+      }).catch((e) => console.error('Failed to patch user state', e));
+    };
+
+    const id = setInterval(() => saveUserState(), SAVE_INTERVAL_MS);
+
+    // The main save: fires when the tab is hidden or closed. `visibilitychange`
+    // is reliable across desktop and mobile, unlike `beforeunload`.
+    const handleVisibility = () => {
+      if (document.visibilityState === 'hidden') saveUserState(true);
+    };
+    document.addEventListener('visibilitychange', handleVisibility);
+
+    return () => {
+      clearInterval(id);
+      document.removeEventListener('visibilitychange', handleVisibility);
+      saveUserState(true);
+    };
   }, []);
 
   return (

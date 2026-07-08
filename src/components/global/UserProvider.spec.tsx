@@ -65,7 +65,16 @@ afterEach(() => {
   vi.restoreAllMocks();
   delete window.increaseMultiplier;
   delete window.hiddenSetScore;
+  Object.defineProperty(document, 'visibilityState', { configurable: true, get: () => 'visible' });
 });
+
+const setHidden = (hidden: boolean) =>
+  Object.defineProperty(document, 'visibilityState', {
+    configurable: true,
+    get: () => (hidden ? 'hidden' : 'visible'),
+  });
+
+const userPatchCalls = () => fetchMock.mock.calls.filter(([url]) => url === '/api/users');
 
 describe('initial visit fetch', () => {
   test('hydrates the context from the API response', async () => {
@@ -147,21 +156,21 @@ describe('score intervals', () => {
     expect(screen.getByTestId('score')).toHaveTextContent('11');
   });
 
-  test('the 5s interval patches the user state', async () => {
+  test('the periodic interval (30s) persists the user state without keepalive', async () => {
     await renderProvider();
 
     await act(async () => {
-      vi.advanceTimersByTime(5000);
+      vi.advanceTimersByTime(30000);
       await Promise.resolve();
     });
 
     expect(fetchMock).toHaveBeenCalledWith(
       '/api/users',
-      expect.objectContaining({ method: 'PATCH' })
+      expect.objectContaining({ method: 'PATCH', keepalive: false })
     );
   });
 
-  test('the 5s patch interval swallows errors', async () => {
+  test('the periodic save swallows errors', async () => {
     fetchMock.mockImplementation((url: string) =>
       url === '/api/visit' ? Promise.resolve(okVisit()) : Promise.reject(new Error('patch failed'))
     );
@@ -169,11 +178,55 @@ describe('score intervals', () => {
     await renderProvider();
 
     await act(async () => {
-      vi.advanceTimersByTime(5000);
+      vi.advanceTimersByTime(30000);
       await Promise.resolve();
     });
 
     expect(console.error).toHaveBeenCalledWith('Failed to patch user state', expect.any(Error));
+  });
+});
+
+describe('persistence on hide / close', () => {
+  test('flushes with keepalive when the tab becomes hidden', async () => {
+    await renderProvider();
+
+    setHidden(true);
+    act(() => document.dispatchEvent(new Event('visibilitychange')));
+
+    expect(fetchMock).toHaveBeenCalledWith(
+      '/api/users',
+      expect.objectContaining({ method: 'PATCH', keepalive: true })
+    );
+  });
+
+  test('does not save while the tab stays visible', async () => {
+    await renderProvider();
+
+    setHidden(false);
+    act(() => document.dispatchEvent(new Event('visibilitychange')));
+
+    expect(userPatchCalls()).toHaveLength(0);
+  });
+
+  test('skips a redundant save when the score has not changed', async () => {
+    await renderProvider();
+
+    setHidden(true);
+    act(() => document.dispatchEvent(new Event('visibilitychange')));
+    act(() => document.dispatchEvent(new Event('visibilitychange')));
+
+    expect(userPatchCalls()).toHaveLength(1);
+  });
+
+  test('flushes on unmount', async () => {
+    const { unmount } = await renderProvider();
+
+    act(() => unmount());
+
+    expect(fetchMock).toHaveBeenCalledWith(
+      '/api/users',
+      expect.objectContaining({ method: 'PATCH', keepalive: true })
+    );
   });
 });
 

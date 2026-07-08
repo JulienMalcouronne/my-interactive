@@ -8,6 +8,7 @@ export const routing = defineRouting({
     '/leaderboard': { fr: '/classement' },
     '/earth': { fr: '/terre' },
     '/individual-carbon-footprint': { fr: '/empreinte-carbone-individuelle' },
+    '/individual-footprint-result': { fr: '/resultat-empreinte-carbone' },
     '/about': { fr: '/a-propos' },
     '/contact': { fr: '/contact' },
     '/resume': { fr: '/cv' },

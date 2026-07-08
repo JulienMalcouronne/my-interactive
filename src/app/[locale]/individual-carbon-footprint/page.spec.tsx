@@ -1,48 +1,68 @@
 import { afterEach, beforeEach, expect, test, vi } from 'vitest';
-import { fireEvent } from '@testing-library/react';
+import { fireEvent, waitFor } from '@testing-library/react';
 import { renderWithIntl } from '@/test/renderWithIntl';
 import IndividualCarbon from './page';
 
+const { push } = vi.hoisted(() => ({ push: vi.fn() }));
+vi.mock('@/i18n/navigation', () => ({ useRouter: () => ({ push }) }));
+
 beforeEach(() => {
-  vi.spyOn(window, 'alert').mockImplementation(() => {});
+  vi.stubGlobal('fetch', vi.fn().mockResolvedValue({ ok: true }));
 });
 
 afterEach(() => {
-  vi.restoreAllMocks();
+  vi.clearAllMocks();
+  vi.unstubAllGlobals();
 });
 
-test('shows the vehicle-type field only for the car transport mode', () => {
+test('shows the car-only fields (vehicle type, carpool) only for the car transport mode', () => {
   const { container } = renderWithIntl(<IndividualCarbon />);
 
   expect(container.querySelector('select[name="carType"]')).not.toBeNull();
+  expect(container.querySelector('input[name="carpoolSize"]')).not.toBeNull();
 
   fireEvent.change(container.querySelector('select[name="transportMode"]')!, {
     target: { value: 'bus' },
   });
   expect(container.querySelector('select[name="carType"]')).toBeNull();
+  expect(container.querySelector('input[name="carpoolSize"]')).toBeNull();
 
-  // switching back brings it back
+  // switching back brings them back
   fireEvent.change(container.querySelector('select[name="transportMode"]')!, {
     target: { value: 'car' },
   });
   expect(container.querySelector('select[name="carType"]')).not.toBeNull();
 });
 
-test('handles number and checkbox inputs then submits to compute the footprint', () => {
+test('handles inputs, persists the result, then navigates with the encoded form', async () => {
   const { container } = renderWithIntl(<IndividualCarbon />);
 
   fireEvent.change(container.querySelector('input[name="dailyCommuteKm"]')!, {
     target: { value: '10' },
   });
+  fireEvent.change(container.querySelector('input[name="commuteDaysPerWeek"]')!, {
+    target: { value: '3' },
+  });
   fireEvent.click(container.querySelector('input[name="isWellInsulated"]')!);
+  fireEvent.click(container.querySelector('input[name="hasRenewableElectricity"]')!);
 
-  const checkbox = container.querySelector('input[name="isWellInsulated"]') as HTMLInputElement;
-  expect(checkbox.checked).toBe(true);
+  const insulated = container.querySelector('input[name="isWellInsulated"]') as HTMLInputElement;
+  expect(insulated.checked).toBe(true);
 
   fireEvent.submit(container.querySelector('form')!);
 
-  expect(window.alert).toHaveBeenCalledTimes(1);
-  const total = (window.alert as ReturnType<typeof vi.fn>).mock.calls[0][0];
-  expect(typeof total).toBe('number');
-  expect(Number.isFinite(total)).toBe(true);
+  await waitFor(() => expect(push).toHaveBeenCalledTimes(1));
+
+  expect(fetch).toHaveBeenCalledWith('/api/carbon', expect.objectContaining({ method: 'POST' }));
+
+  const arg = push.mock.calls[0][0];
+  expect(arg.pathname).toBe('/individual-footprint-result');
+
+  const payload = JSON.parse(arg.query.data);
+  expect(payload).toMatchObject({
+    dailyCommuteKm: 10,
+    commuteDaysPerWeek: 3,
+    isWellInsulated: true,
+    hasRenewableElectricity: true,
+  });
 });

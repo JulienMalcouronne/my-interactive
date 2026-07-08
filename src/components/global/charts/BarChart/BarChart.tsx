@@ -23,8 +23,24 @@ type TData = {
 
 ChartJS.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend);
 
+// Single-series chart: no legend (axis labels carry identity), rounded bar ends,
+// and neutral tick/grid colors that read on both light and dark surfaces.
 const options = {
   responsive: true,
+  maintainAspectRatio: false,
+  elements: { bar: { borderRadius: 4 } },
+  plugins: { legend: { display: false } },
+  scales: {
+    x: {
+      grid: { display: false },
+      ticks: { color: '#94a3b8' },
+    },
+    y: {
+      beginAtZero: true,
+      grid: { color: 'rgba(148, 163, 184, 0.2)' },
+      ticks: { color: '#94a3b8' },
+    },
+  },
 };
 
 export default function MyChart({ data }: { data: TData }) {

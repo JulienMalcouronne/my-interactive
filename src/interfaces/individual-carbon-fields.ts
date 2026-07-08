@@ -7,16 +7,24 @@ interface IIndividualCarbonFields {
   transportMode: TTransportMode;
   carType: TCarType;
   dailyCommuteKm: number;
+  commuteDaysPerWeek: number;
+  carpoolSize: number;
   shortFlightsPerYear: number;
+  mediumFlightsPerYear: number;
   longFlightsPerYear: number;
   meatConsumption: TMeatConsumption;
   homeSize: number;
   heating: THeating;
   isWellInsulated: boolean;
+  hasRenewableElectricity: boolean;
   peopleInHousehold: number;
   clothesPerYear: number;
   devicesPerYear: number;
 }
+
+type TCarbonCategory = 'transport' | 'flights' | 'food' | 'heating' | 'clothes' | 'devices';
+
+type ICarbonBreakdown = Record<TCarbonCategory, number> & { total: number };
 
 interface ICarbonInput {
   label: string;
@@ -25,4 +33,4 @@ interface ICarbonInput {
   min: number;
 }
 
-export type { IIndividualCarbonFields, ICarbonInput };
+export type { IIndividualCarbonFields, ICarbonInput, ICarbonBreakdown, TCarbonCategory };

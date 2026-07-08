@@ -3,22 +3,27 @@
 import type { IIndividualCarbonFields } from '@/interfaces';
 import { FormEvent, useState } from 'react';
 import { useTranslations } from 'next-intl';
-import { calculateCO2 } from '@/lib';
+import { useRouter } from '@/i18n/navigation';
 import styles from './page.module.css';
 
 export default function IndividualCarbon() {
   const t = useTranslations();
+  const router = useRouter();
 
   const [form, setForm] = useState<IIndividualCarbonFields>({
     transportMode: 'car',
     carType: 'essence',
     dailyCommuteKm: 0,
+    commuteDaysPerWeek: 5,
+    carpoolSize: 1,
     shortFlightsPerYear: 0,
+    mediumFlightsPerYear: 0,
     longFlightsPerYear: 0,
     meatConsumption: 'medium',
     homeSize: 50,
     heating: 'gas',
     isWellInsulated: false,
+    hasRenewableElectricity: false,
     peopleInHousehold: 1,
     clothesPerYear: 10,
     devicesPerYear: 1,
@@ -40,10 +45,22 @@ export default function IndividualCarbon() {
     }));
   };
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const total = calculateCO2(form);
-    alert(total);
+    // Best-effort persistence of the result; the page still shows even if it fails.
+    try {
+      await fetch('/api/carbon', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(form),
+      });
+    } catch {
+      // ignore network failures
+    }
+    router.push({
+      pathname: '/individual-footprint-result',
+      query: { data: JSON.stringify(form) },
+    });
   };
 
   return (
@@ -70,19 +87,33 @@ export default function IndividualCarbon() {
           </div>
 
           {form.transportMode === 'car' && (
-            <div>
-              <label className={styles.label}>{t('vehicleType')}</label>
-              <select
-                name="carType"
-                value={form.carType}
-                onChange={handleChange}
-                className={styles.field}
-              >
-                <option value="essence">{t('gas')}</option>
-                <option value="diesel">{t('diesel')}</option>
-                <option value="electric">{t('electric')}</option>
-              </select>
-            </div>
+            <>
+              <div>
+                <label className={styles.label}>{t('vehicleType')}</label>
+                <select
+                  name="carType"
+                  value={form.carType}
+                  onChange={handleChange}
+                  className={styles.field}
+                >
+                  <option value="essence">{t('gas')}</option>
+                  <option value="diesel">{t('diesel')}</option>
+                  <option value="electric">{t('electric')}</option>
+                </select>
+              </div>
+
+              <div>
+                <label className={styles.label}>{t('carpoolSize')}</label>
+                <input
+                  type="number"
+                  name="carpoolSize"
+                  min={1}
+                  value={form.carpoolSize}
+                  onChange={handleChange}
+                  className={styles.field}
+                />
+              </div>
+            </>
           )}
 
           <div>
@@ -98,12 +129,37 @@ export default function IndividualCarbon() {
           </div>
 
           <div>
+            <label className={styles.label}>{t('commuteDaysPerWeek')}</label>
+            <input
+              type="number"
+              name="commuteDaysPerWeek"
+              min={0}
+              max={7}
+              value={form.commuteDaysPerWeek}
+              onChange={handleChange}
+              className={styles.field}
+            />
+          </div>
+
+          <div>
             <label className={styles.label}>{t('shortFlyPerYear')}</label>
             <input
               type="number"
               name="shortFlightsPerYear"
               min={0}
               value={form.shortFlightsPerYear}
+              onChange={handleChange}
+              className={styles.field}
+            />
+          </div>
+
+          <div>
+            <label className={styles.label}>{t('mediumFlyPerYear')}</label>
+            <input
+              type="number"
+              name="mediumFlightsPerYear"
+              min={0}
+              value={form.mediumFlightsPerYear}
               onChange={handleChange}
               className={styles.field}
             />
@@ -172,6 +228,19 @@ export default function IndividualCarbon() {
                 onChange={handleChange}
               />
               {t('homeWellIsolated')}
+            </label>
+          </div>
+
+          <div>
+            <label className={styles.checkboxLabel}>
+              <input
+                className={styles.checkbox}
+                type="checkbox"
+                name="hasRenewableElectricity"
+                checked={form.hasRenewableElectricity}
+                onChange={handleChange}
+              />
+              {t('renewableElectricity')}
             </label>
           </div>
 
