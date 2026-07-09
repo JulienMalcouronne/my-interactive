@@ -12,6 +12,7 @@ const NAV_ITEMS = [
   { basePath: '/earth', label: 'earth' },
   { basePath: '/individual-carbon-footprint', label: 'carbonFootprint' },
   { basePath: '/resume', label: 'cv' },
+  { basePath: '/dog-walk', label: 'dogWalk' },
   { basePath: '/leaderboard', label: 'leaderboard', rightAlign: true },
 ] as const;
 

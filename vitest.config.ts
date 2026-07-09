@@ -23,6 +23,7 @@ export default defineConfig({
       ],
       exclude: [
         'src/components/earth/**', // Canvas WebGL / react-three-fiber, non testable en jsdom
+        'src/components/dogwalk/**', // Canvas 2D game loop (requestAnimationFrame), non testable en jsdom
         'src/lib/db.ts', // instancie un Pool pg à l'import
         '**/*.spec.tsx',
         '**/*.spec.ts',

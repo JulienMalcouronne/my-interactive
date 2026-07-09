@@ -7,6 +7,7 @@ const localizedRoutes = {
     en: '/individual-carbon-footprint',
   },
   '/resume': { fr: '/cv', en: '/resume' },
+  '/dog-walk': { fr: '/promenade-chien', en: '/dog-walk' },
 } as const;
 
 type BasePath = keyof typeof localizedRoutes;

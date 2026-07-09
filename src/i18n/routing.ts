@@ -9,6 +9,7 @@ export const routing = defineRouting({
     '/earth': { fr: '/terre' },
     '/individual-carbon-footprint': { fr: '/empreinte-carbone-individuelle' },
     '/individual-footprint-result': { fr: '/resultat-empreinte-carbone' },
+    '/dog-walk': { fr: '/promenade-chien' },
     '/about': { fr: '/a-propos' },
     '/contact': { fr: '/contact' },
     '/resume': { fr: '/cv' },
