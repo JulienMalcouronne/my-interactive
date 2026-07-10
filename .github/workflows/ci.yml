@@ -19,10 +19,19 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-          cache: yarn
 
+      # Corepack activates the Yarn version pinned in package.json
+      # (packageManager: yarn@4.9.1). Must run before any `yarn` call — hence
+      # no `cache: yarn` on setup-node, which would invoke Yarn 1 too early.
       - name: Enable Corepack (Yarn 4)
         run: corepack enable
+
+      - name: Cache Yarn packages
+        uses: actions/cache@v4
+        with:
+          path: ~/.yarn/berry/cache
+          key: yarn-${{ runner.os }}-${{ hashFiles('yarn.lock') }}
+          restore-keys: yarn-${{ runner.os }}-
 
       - name: Install dependencies
         run: yarn install --immutable
