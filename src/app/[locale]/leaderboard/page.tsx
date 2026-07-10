@@ -3,6 +3,12 @@ import { getTranslations } from 'next-intl/server';
 import CurrentUserRow from '@/components/leaderboard/current-user-row';
 import styles from './page.module.css';
 
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  const t = await getTranslations({ locale });
+  return { title: t('leaderboard') };
+}
+
 type LeaderboardEntry = {
   id: number;
   uid: string;

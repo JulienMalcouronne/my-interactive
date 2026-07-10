@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import pool from '@/lib/db';
+import { getCookieSecret, visitorIdFromCookie } from '@/lib/visitor';
+import { rateLimit } from '@/lib/rateLimit';
 
 const MAX_SCORE = 1_000_000;
 
@@ -16,10 +18,13 @@ export async function GET() {
 }
 
 export async function POST(req: NextRequest) {
-  const forwarded = req.headers.get('x-forwarded-for');
-  const ip = forwarded?.split(',')[0]?.trim() || 'unknown';
-  const userAgent = req.headers.get('user-agent') || 'unknown';
-  const fingerprint = `${ip}|${userAgent}`;
+  const vid = visitorIdFromCookie(req.headers.get('cookie'), getCookieSecret());
+  if (!vid) {
+    return NextResponse.json({ error: 'No visitor session' }, { status: 401 });
+  }
+  if (!rateLimit(`dog-walk:${vid}`, 30, 60_000).allowed) {
+    return NextResponse.json({ error: 'Too many requests' }, { status: 429 });
+  }
 
   const body = await req.json();
   const score = (body as { score?: unknown })?.score;
@@ -31,10 +36,10 @@ export async function POST(req: NextRequest) {
   const runScore = Math.min(Math.max(Math.round(score), 0), MAX_SCORE);
 
   try {
-    // Keep only the best run for this user.
+    // Keep only the best run for this visitor.
     const result = await pool.query(
-      'UPDATE users SET best_walk = GREATEST(COALESCE(best_walk, 0), $1) WHERE fingerprint = $2 RETURNING best_walk',
-      [runScore, fingerprint]
+      'UPDATE users SET best_walk = GREATEST(COALESCE(best_walk, 0), $1) WHERE visitor_id = $2 RETURNING best_walk',
+      [runScore, vid]
     );
 
     if (result.rowCount === 0) {
@@ -43,7 +48,7 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json({ best: result.rows[0].best_walk }, { status: 200 });
   } catch (error) {
-    console.error('Error in /api/dog-walk:', error);
+    console.error('Error in POST /api/dog-walk:', error);
     return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
   }
 }

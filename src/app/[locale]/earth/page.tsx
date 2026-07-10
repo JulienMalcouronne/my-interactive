@@ -1,16 +1,12 @@
-'use client';
+import { getTranslations } from 'next-intl/server';
+import EarthClient from './EarthClient';
 
-import React from 'react';
-import dynamic from 'next/dynamic';
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  const t = await getTranslations({ locale });
+  return { title: t('earth') };
+}
 
-const Earth = dynamic(() => import('@/components/earth/Earth'), {
-  ssr: false,
-});
-
-export default function Airplane() {
-  return (
-    <div>
-      <Earth />
-    </div>
-  );
+export default function EarthPage() {
+  return <EarthClient />;
 }

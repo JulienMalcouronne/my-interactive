@@ -1,7 +1,7 @@
 import { afterEach, beforeEach, expect, test, vi } from 'vitest';
 import { fireEvent, waitFor } from '@testing-library/react';
 import { renderWithIntl } from '@/test/renderWithIntl';
-import IndividualCarbon from './page';
+import IndividualCarbonForm from './IndividualCarbonForm';
 
 const { push } = vi.hoisted(() => ({ push: vi.fn() }));
 vi.mock('@/i18n/navigation', () => ({ useRouter: () => ({ push }) }));
@@ -16,7 +16,7 @@ afterEach(() => {
 });
 
 test('shows the car-only fields (vehicle type, carpool) only for the car transport mode', () => {
-  const { container } = renderWithIntl(<IndividualCarbon />);
+  const { container } = renderWithIntl(<IndividualCarbonForm />);
 
   expect(container.querySelector('select[name="carType"]')).not.toBeNull();
   expect(container.querySelector('input[name="carpoolSize"]')).not.toBeNull();
@@ -35,7 +35,7 @@ test('shows the car-only fields (vehicle type, carpool) only for the car transpo
 });
 
 test('handles inputs, persists the result, then navigates with the encoded form', async () => {
-  const { container } = renderWithIntl(<IndividualCarbon />);
+  const { container } = renderWithIntl(<IndividualCarbonForm />);
 
   fireEvent.change(container.querySelector('input[name="dailyCommuteKm"]')!, {
     target: { value: '10' },

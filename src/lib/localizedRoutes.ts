@@ -8,6 +8,7 @@ const localizedRoutes = {
   },
   '/resume': { fr: '/cv', en: '/resume' },
   '/dog-walk': { fr: '/promenade-chien', en: '/dog-walk' },
+  '/tennis': { fr: '/tennis', en: '/tennis' },
 } as const;
 
 type BasePath = keyof typeof localizedRoutes;

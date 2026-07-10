@@ -1,0 +1,141 @@
+.wrap {
+  position: relative;
+  width: 100%;
+  max-width: 60rem;
+  margin-inline: auto;
+}
+
+.canvas {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  max-height: 70vh;
+  border-radius: var(--radius-2xl);
+  border: 1px solid var(--surface-border);
+  background: #166534;
+  touch-action: none;
+  cursor: crosshair;
+}
+
+/* HUD -------------------------------------------------------------------- */
+.hud {
+  position: absolute;
+  top: 0.75rem;
+  left: 0.75rem;
+  right: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  pointer-events: none;
+}
+.score {
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  background: color-mix(in srgb, var(--black) 55%, transparent);
+  color: var(--white);
+  font-size: 1rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+.diffBadge {
+  padding: 0.25rem 0.625rem;
+  border-radius: 9999px;
+  background: color-mix(in srgb, var(--black) 45%, transparent);
+  color: var(--white);
+  font-size: 0.8125rem;
+  font-weight: 600;
+}
+.hudBtns {
+  margin-left: auto;
+  display: flex;
+  gap: 0.375rem;
+  pointer-events: auto;
+}
+.hudBtn {
+  width: 2rem;
+  height: 2rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  background: color-mix(in srgb, var(--black) 55%, transparent);
+  font-size: 0.9375rem;
+  line-height: 1;
+}
+
+/* Overlays --------------------------------------------------------------- */
+.overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  background: color-mix(in srgb, var(--black) 35%, transparent);
+  border-radius: var(--radius-2xl);
+}
+.card {
+  width: 100%;
+  max-width: 28rem;
+  text-align: center;
+  padding: 2rem;
+  border-radius: var(--radius-2xl);
+  background: var(--surface);
+  border: 1px solid var(--surface-border);
+  box-shadow: var(--shadow-xl);
+  color: var(--foreground);
+}
+.cardTitle {
+  font-size: 1.5rem;
+  font-weight: 800;
+  margin-bottom: 0.75rem;
+}
+.controls {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  margin-bottom: 1rem;
+  line-height: 1.5;
+}
+.choose {
+  font-size: 0.8125rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+  margin-bottom: 0.75rem;
+}
+.payout {
+  font-size: 1.125rem;
+  font-weight: 700;
+  margin-bottom: 1.25rem;
+  font-variant-numeric: tabular-nums;
+}
+.diffRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: center;
+}
+.button {
+  background: var(--green-600);
+  color: var(--white);
+  font-weight: 600;
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--radius);
+  transition: background-color 150ms ease;
+}
+.button:hover {
+  background: var(--green-700);
+}
+.diffBtn {
+  background: var(--surface);
+  color: var(--foreground);
+  font-weight: 600;
+  padding: 0.75rem 1.25rem;
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius);
+  transition: border-color 150ms ease;
+}
+.diffBtn:hover {
+  border-color: var(--accent);
+}

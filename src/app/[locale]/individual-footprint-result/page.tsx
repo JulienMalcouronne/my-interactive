@@ -9,6 +9,13 @@ import styles from './page.module.css';
 
 type Props = { searchParams: Promise<{ data?: string }> };
 
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  const t = await getTranslations({ locale });
+  // Per-visitor result — not worth indexing.
+  return { title: t('resultTitle'), robots: { index: false } };
+}
+
 const SUSTAINABLE_TARGET = 2000;
 const FRENCH_AVERAGE = 9000;
 const MIN_PARTICIPANTS = 3;

@@ -13,6 +13,7 @@ const NAV_ITEMS = [
   { basePath: '/individual-carbon-footprint', label: 'carbonFootprint' },
   { basePath: '/resume', label: 'cv' },
   { basePath: '/dog-walk', label: 'dogWalk' },
+  { basePath: '/tennis', label: 'tennis' },
   { basePath: '/leaderboard', label: 'leaderboard', rightAlign: true },
 ] as const;
 

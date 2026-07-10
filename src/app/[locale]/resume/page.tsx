@@ -1,8 +1,15 @@
 import React from 'react';
 import { UserIcon, MapPinIcon, EnvelopeIcon, PhoneIcon } from '@heroicons/react/24/outline';
+import { getTranslations } from 'next-intl/server';
 import ResumeActions from '@/components/resume/ResumeActions';
 import { useTranslations } from 'next-intl';
 import styles from './page.module.css';
+
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  const t = await getTranslations({ locale });
+  return { title: t('cv') };
+}
 
 export default function Resume() {
   const t = useTranslations();

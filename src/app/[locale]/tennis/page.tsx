@@ -1,12 +1,12 @@
 import { getTranslations } from 'next-intl/server';
-import DogWalkClient from './DogWalkClient';
+import TennisClient from './TennisClient';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   const t = await getTranslations({ locale });
-  return { title: t('dogWalk') };
+  return { title: t('tennis') };
 }
 
-export default function DogWalkPage() {
-  return <DogWalkClient />;
+export default function TennisPage() {
+  return <TennisClient />;
 }

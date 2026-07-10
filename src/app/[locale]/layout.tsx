@@ -9,6 +9,7 @@ import ScoreHeader from '@/components/global/ScoreHeader';
 import ThemeToggle from '@/components/global/ThemeToggle';
 import Footer from '@/components/global/footer/Footer';
 import UserProvider from '@/components/global/UserProvider';
+import { SITE_GITHUB, SITE_JOB_TITLE, SITE_LINKEDIN, SITE_NAME, SITE_URL } from '@/lib/site';
 import styles from './layout.module.css';
 
 // Resolve the theme before paint to avoid a flash of the wrong theme.
@@ -28,26 +29,52 @@ export async function generateMetadata(props: Omit<Props, 'children'>) {
   const t = await getTranslations({ locale });
 
   return {
-    title: t('title'),
+    metadataBase: new URL(SITE_URL),
+    title: {
+      default: t('title'),
+      template: `%s · ${SITE_NAME}`,
+    },
     description: t('description'),
+    alternates: {
+      canonical: `/${locale}`,
+      languages: {
+        en: '/en',
+        fr: '/fr',
+      },
+    },
     openGraph: {
       title: t('title'),
       description: t('description'),
-      url: 'https://tbd.com',
-      siteName: t('title'),
+      url: `${SITE_URL}/${locale}`,
+      siteName: SITE_NAME,
       images: [
         {
-          url: '/images/opengraph.jpg',
+          url: '/images/opengraph-image.jpg',
           width: 1200,
           height: 630,
-          alt: 'Julien Malcouronne Portfolio Preview',
+          alt: `${SITE_NAME} — portfolio`,
         },
       ],
       locale,
       type: 'website',
     },
+    twitter: {
+      card: 'summary_large_image',
+      title: t('title'),
+      description: t('description'),
+      images: ['/images/opengraph-image.jpg'],
+    },
   };
 }
+
+const personJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: SITE_NAME,
+  url: SITE_URL,
+  jobTitle: SITE_JOB_TITLE,
+  sameAs: [SITE_GITHUB, SITE_LINKEDIN],
+};
 
 export default async function LocaleLayout({ children, params }: Props) {
   const { locale } = await params;
@@ -65,6 +92,10 @@ export default async function LocaleLayout({ children, params }: Props) {
           hydration mismatch warnings. */}
       <body suppressHydrationWarning>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
+        />
         <NextIntlClientProvider>
           <main>
             <UserProvider>
