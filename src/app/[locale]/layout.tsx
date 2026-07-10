@@ -6,7 +6,6 @@ import { routing } from '../../i18n/routing';
 import MainNavbar from '@/components/global/MainNavbar';
 import PseudonymDisplay from '@/components/global/PseudonymDisplay';
 import ScoreHeader from '@/components/global/ScoreHeader';
-import ThemeToggle from '@/components/global/ThemeToggle';
 import Footer from '@/components/global/footer/Footer';
 import UserProvider from '@/components/global/UserProvider';
 import { SITE_GITHUB, SITE_JOB_TITLE, SITE_LINKEDIN, SITE_NAME, SITE_URL } from '@/lib/site';
@@ -103,10 +102,7 @@ export default async function LocaleLayout({ children, params }: Props) {
                 <MainNavbar />
                 <div className={`${styles.scoreBar} no-print`}>
                   <PseudonymDisplay />
-                  <div className={styles.scoreBarRight}>
-                    <ThemeToggle />
-                    <ScoreHeader />
-                  </div>
+                  <ScoreHeader />
                 </div>
               </div>
               <Suspense>{children}</Suspense>

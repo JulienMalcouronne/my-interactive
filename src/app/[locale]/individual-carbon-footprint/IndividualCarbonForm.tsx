@@ -69,8 +69,11 @@ export default function IndividualCarbonForm() {
         <h1 className={styles.title}>{t('calculateCarbonFootprint')}</h1>
         <form className={styles.form} onSubmit={handleSubmit}>
           <div>
-            <label className={styles.label}>{t('transportMode')}</label>
+            <label htmlFor="transportMode" className={styles.label}>
+              {t('transportMode')}
+            </label>
             <select
+              id="transportMode"
               name="transportMode"
               value={form.transportMode}
               onChange={handleChange}
@@ -89,8 +92,11 @@ export default function IndividualCarbonForm() {
           {form.transportMode === 'car' && (
             <>
               <div>
-                <label className={styles.label}>{t('vehicleType')}</label>
+                <label htmlFor="carType" className={styles.label}>
+                  {t('vehicleType')}
+                </label>
                 <select
+                  id="carType"
                   name="carType"
                   value={form.carType}
                   onChange={handleChange}
@@ -103,8 +109,11 @@ export default function IndividualCarbonForm() {
               </div>
 
               <div>
-                <label className={styles.label}>{t('carpoolSize')}</label>
+                <label htmlFor="carpoolSize" className={styles.label}>
+                  {t('carpoolSize')}
+                </label>
                 <input
+                  id="carpoolSize"
                   type="number"
                   name="carpoolSize"
                   min={1}
@@ -117,8 +126,11 @@ export default function IndividualCarbonForm() {
           )}
 
           <div>
-            <label className={styles.label}>{t('dailyCommuteKm')}</label>
+            <label htmlFor="dailyCommuteKm" className={styles.label}>
+              {t('dailyCommuteKm')}
+            </label>
             <input
+              id="dailyCommuteKm"
               type="number"
               name="dailyCommuteKm"
               min={0}
@@ -129,8 +141,11 @@ export default function IndividualCarbonForm() {
           </div>
 
           <div>
-            <label className={styles.label}>{t('commuteDaysPerWeek')}</label>
+            <label htmlFor="commuteDaysPerWeek" className={styles.label}>
+              {t('commuteDaysPerWeek')}
+            </label>
             <input
+              id="commuteDaysPerWeek"
               type="number"
               name="commuteDaysPerWeek"
               min={0}
@@ -142,8 +157,11 @@ export default function IndividualCarbonForm() {
           </div>
 
           <div>
-            <label className={styles.label}>{t('shortFlyPerYear')}</label>
+            <label htmlFor="shortFlightsPerYear" className={styles.label}>
+              {t('shortFlyPerYear')}
+            </label>
             <input
+              id="shortFlightsPerYear"
               type="number"
               name="shortFlightsPerYear"
               min={0}
@@ -154,8 +172,11 @@ export default function IndividualCarbonForm() {
           </div>
 
           <div>
-            <label className={styles.label}>{t('mediumFlyPerYear')}</label>
+            <label htmlFor="mediumFlightsPerYear" className={styles.label}>
+              {t('mediumFlyPerYear')}
+            </label>
             <input
+              id="mediumFlightsPerYear"
               type="number"
               name="mediumFlightsPerYear"
               min={0}
@@ -166,8 +187,11 @@ export default function IndividualCarbonForm() {
           </div>
 
           <div>
-            <label className={styles.label}>{t('longFlyPerYear')}</label>
+            <label htmlFor="longFlightsPerYear" className={styles.label}>
+              {t('longFlyPerYear')}
+            </label>
             <input
+              id="longFlightsPerYear"
               type="number"
               name="longFlightsPerYear"
               min={0}
@@ -178,8 +202,11 @@ export default function IndividualCarbonForm() {
           </div>
 
           <div>
-            <label className={styles.label}>{t('meatConsumption')}</label>
+            <label htmlFor="meatConsumption" className={styles.label}>
+              {t('meatConsumption')}
+            </label>
             <select
+              id="meatConsumption"
               name="meatConsumption"
               value={form.meatConsumption}
               onChange={handleChange}
@@ -193,8 +220,11 @@ export default function IndividualCarbonForm() {
           </div>
 
           <div>
-            <label className={styles.label}>{t('homeSurface')}</label>
+            <label htmlFor="homeSize" className={styles.label}>
+              {t('homeSurface')}
+            </label>
             <input
+              id="homeSize"
               type="number"
               name="homeSize"
               min={1}
@@ -205,8 +235,11 @@ export default function IndividualCarbonForm() {
           </div>
 
           <div>
-            <label className={styles.label}>{t('heating')}</label>
+            <label htmlFor="heating" className={styles.label}>
+              {t('heating')}
+            </label>
             <select
+              id="heating"
               name="heating"
               value={form.heating}
               onChange={handleChange}
@@ -245,8 +278,11 @@ export default function IndividualCarbonForm() {
           </div>
 
           <div>
-            <label className={styles.label}>{t('nbPeopleLivingAtHome')}</label>
+            <label htmlFor="peopleInHousehold" className={styles.label}>
+              {t('nbPeopleLivingAtHome')}
+            </label>
             <input
+              id="peopleInHousehold"
               type="number"
               name="peopleInHousehold"
               min={1}
@@ -257,8 +293,11 @@ export default function IndividualCarbonForm() {
           </div>
 
           <div>
-            <label className={styles.label}>{t('clothesBoughtPerYear')}</label>
+            <label htmlFor="clothesPerYear" className={styles.label}>
+              {t('clothesBoughtPerYear')}
+            </label>
             <input
+              id="clothesPerYear"
               type="number"
               name="clothesPerYear"
               min={0}
@@ -269,8 +308,11 @@ export default function IndividualCarbonForm() {
           </div>
 
           <div>
-            <label className={styles.label}>{t('electronicalGoodsPurchasedPerYear')}</label>
+            <label htmlFor="devicesPerYear" className={styles.label}>
+              {t('electronicalGoodsPurchasedPerYear')}
+            </label>
             <input
+              id="devicesPerYear"
               type="number"
               name="devicesPerYear"
               min={0}

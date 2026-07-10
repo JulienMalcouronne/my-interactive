@@ -23,6 +23,12 @@
   text-align: right;
 }
 
+.navRight {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
 .link {
   transition: color 200ms ease;
   color: var(--panel-muted);

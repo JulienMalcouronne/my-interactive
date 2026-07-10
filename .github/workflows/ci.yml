@@ -1,0 +1,45 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+# Cancel superseded runs on the same ref.
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: yarn
+
+      - name: Enable Corepack (Yarn 4)
+        run: corepack enable
+
+      - name: Install dependencies
+        run: yarn install --immutable
+
+      - name: Format check
+        run: yarn format:check
+
+      - name: Type check
+        run: yarn typecheck
+
+      - name: Tests + coverage
+        run: yarn test:coverage
+
+      - name: Build
+        run: yarn build
+        env:
+          # Build needs no DB (dynamic pages hit it at request time); fall back to
+          # placeholders so metadata/sitemap resolve during static generation.
+          NEXT_PUBLIC_BASE_URL: https://example.com
+          COOKIE_SECRET: ci-placeholder-secret

@@ -5,6 +5,7 @@ import { useLocale, useTranslations } from 'next-intl';
 import { usePathname } from 'next/navigation';
 import { getLocalizedHref, SupportedLocale } from '@/lib/localizedRoutes';
 import LanguageSwitcher from './LangSwitcher';
+import ThemeToggle from './ThemeToggle';
 import styles from './MainNavbar.module.css';
 
 const NAV_ITEMS = [
@@ -28,7 +29,7 @@ export default function MainNavbar() {
   return (
     <nav className={styles.nav}>
       <Link href="/">
-        <img className={styles.logo} src="/images/icon.png"></img>
+        <img className={styles.logo} src="/images/icon.png" alt="Julien Malcouronne" />
       </Link>
       <ul className={styles.list}>
         {NAV_ITEMS.map((item) => {
@@ -47,7 +48,10 @@ export default function MainNavbar() {
           );
         })}
       </ul>
-      <LanguageSwitcher />
+      <div className={styles.navRight}>
+        <ThemeToggle />
+        <LanguageSwitcher />
+      </div>
     </nav>
   );
 }
