@@ -1,8 +1,7 @@
 import React from 'react';
 import { UserIcon, MapPinIcon, EnvelopeIcon, PhoneIcon } from '@heroicons/react/24/outline';
-import { getTranslations } from 'next-intl/server';
+import { getTranslations, setRequestLocale } from 'next-intl/server';
 import ResumeActions from '@/components/resume/ResumeActions';
-import { useTranslations } from 'next-intl';
 import styles from './page.module.css';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
@@ -11,8 +10,10 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   return { title: t('cv') };
 }
 
-export default function Resume() {
-  const t = useTranslations();
+export default async function Resume({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  setRequestLocale(locale);
+  const t = await getTranslations();
   const numberOfYears = new Date().getFullYear() - 2021;
 
   return (
