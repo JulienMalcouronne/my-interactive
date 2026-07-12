@@ -99,7 +99,7 @@ export default async function Home({ params }: Props) {
                 <h3 className={styles.projectTitle}>ClimateSeed Contribute Platform</h3>
                 <p className={styles.projectText}>{t('homeProject2Text')}</p>
                 <div className={styles.tagRow}>
-                  <span className={styles.tag}>Nuxt 3</span>
+                  <span className={styles.tag}>Nuxt 4</span>
                   <span className={styles.tag}>Vue 3</span>
                   <span className={styles.tag}>TypeScript</span>
                 </div>
