@@ -38,6 +38,9 @@ export default function Footer() {
             <li>
               <Link href="/tennis">{t('tennis')}</Link>
             </li>
+            <li>
+              <Link href="/design-system">{t('designSystem')}</Link>
+            </li>
 
             <li>
               <Link href="/leaderboard">{t('leaderboard')}</Link>

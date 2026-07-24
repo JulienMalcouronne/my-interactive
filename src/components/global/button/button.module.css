@@ -5,6 +5,10 @@
   transition: background-color 150ms ease;
   cursor: pointer;
 }
+.button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
 
 .blue {
   background: var(--blue-600);

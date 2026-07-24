@@ -11,6 +11,7 @@ export const routing = defineRouting({
     '/individual-footprint-result': { fr: '/resultat-empreinte-carbone' },
     '/dog-walk': { fr: '/promenade-chien' },
     '/tennis': { fr: '/tennis' },
+    '/design-system': { fr: '/design-system' },
     '/about': { fr: '/a-propos' },
     '/contact': { fr: '/contact' },
     '/resume': { fr: '/cv' },
